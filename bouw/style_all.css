@@ -369,3 +369,25 @@ body.side-on .side{transform:none}
 @media(max-width:999px){.side{width:min(86vw,320px);box-shadow:var(--shadow)}body.side-on .sideback{display:block;position:fixed;inset:var(--tb) 0 0 0;background:rgba(0,0,0,.4);z-index:39}}
 .tabswrap{margin-left:auto}
 @media print{.side,.sideback{display:none!important}body.side-on main.page,body.side-on footer{margin-left:0}}
+/* ---- rustiger kleurenpalet, geen dikke kleurlijnen ---- */
+:root{--blue:#4b6c9e;--teal:#3f8a86;--purple:#7466a3;--orange:#bf7a45;--pink:#aa6a89;--green:#5b8f68;--red:#bb5c5c;--amber:#b38a3e;--bg:#f5f7fa;--border:#e0e6ee}
+[data-theme=dark]{--blue:#86a5d4;--teal:#6cc0b8;--purple:#a99bd6;--orange:#d9a070;--pink:#d39ab7;--green:#86c295;--red:#d98a8a;--amber:#d6b26a}
+.sec{border-top:1px solid var(--border)}
+.callout{border-left:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 7%,var(--surface))}
+.ex{border-left:1px solid var(--border)}
+.q{border-left:1px solid var(--border)}
+.pdfcard{border-left:1px solid var(--border)}
+.setbar{border-left:1px solid var(--border)}
+.chcard{border-top:1px solid var(--border)}
+.hero{background:linear-gradient(120deg,#3f7d83 0%,#4b6c9e 55%,#6a64a0 100%)}
+.page .pagetitle{background:linear-gradient(120deg,#4b6c9e,#5a8fa0)}
+.page[data-pid$=oefeningen] .pagetitle{background:linear-gradient(120deg,#b0723f,#c49a5a)}
+.page[data-pid$=kennistoets] .pagetitle{background:linear-gradient(120deg,#6f629e,#a0668a)}
+.page[data-pid$=overzicht] .pagetitle{background:linear-gradient(120deg,#a0668a,#c08460)}
+.page[data-pid^="12-"] .pagetitle,.page[data-pid$=extra-vs] .pagetitle,.page[data-pid$=-extra] .pagetitle{background:linear-gradient(120deg,#5b8f68,#3f8a86)}
+.tile.t4{background:linear-gradient(135deg,#a0668a,#c08460)}
+.chcard .cardart{background:linear-gradient(120deg,#3f7d83,#4b6c9e 55%,#6a64a0)}
+.brand .logo{background:linear-gradient(135deg,var(--blue),var(--purple))}
+.progressbar i{background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
+[data-theme=dark] .hero{background:linear-gradient(120deg,#2c5a60 0%,#34507a 55%,#4d4779 100%)}
+[data-theme=dark] .page .pagetitle{background:linear-gradient(120deg,#34507a,#3e6573)}

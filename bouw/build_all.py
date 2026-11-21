@@ -121,6 +121,26 @@ def looks_cmd(lines):
         if t and (t[0] in CMDS or re.match(r'^(\./|~/|/)\S+$', t[0]) or re.match(r'^\w+=', t[0])): ok += 1
     return ok / len(ls) >= 0.7
 
+
+CTRL = re.compile(r'^(if|then|else|elif|fi|for|do|done|while|until|case|esac|function|select)\b|^[{}]$|^#!|\(\)\s*\{?$|\\$')
+def join_cmds(lines, multiline):
+    """Eén regel met '; ertussen als dat veilig kan, anders gewone regeleinden."""
+    L = [l for l in lines]
+    real = [l.rstrip() for l in L if l.strip() and not l.strip().startswith('#')]
+    if len(real) < 2: return '\n'.join(L).strip('\n')
+    def strip_c(l):
+        if re.search(r'\s#(\s|$)', l) and not re.search('[\'"]', l): return re.split(r'\s+#(?:\s|$)', l)[0].rstrip()
+        return l
+    real = [strip_c(l) for l in real]
+    unsafe = multiline or any(CTRL.search(l.strip()) or re.search(r'\s#(\s|$)', l) for l in real)
+    if unsafe: return '\n'.join(L).strip('\n')
+    out = ''
+    for l in real:
+        l = l.strip()
+        if out and not re.search(r'(;|&|\||\\)$', out): out += ';'
+        out += (' ' if out else '') + l
+    return out
+
 def render_code(lang, body, in_details):
     lines = body.split('\n')
     has_prompt = any(PROMPT.match(l) for l in lines)
@@ -132,7 +152,7 @@ def render_code(lang, body, in_details):
         return '<div class="filebox script"><div class="bar"><span>📜 Script</span>%s</div><pre>%s</pre></div>' % (copy_btn(body), esc(body))
     if has_prompt or lang in ('bash', 'sh', 'shell') or (lang == '' and (in_details or looks_cmd(lines))):
         script = not has_prompt
-        rows = []; copy = []; title = 'Terminal'
+        rows = []; copy = []; title = 'Terminal'; multiline = False
         mode_input = False; marker = None
         for l in lines:
             raw, an = annot_split(l)
@@ -144,8 +164,9 @@ def render_code(lang, body, in_details):
                 rows.append('<span class="l">%s%s%s</span>' % (pr, hl_cmd(cmd), annotation(an)))
                 copy.append(cmd)
                 hm = re.search(r'<<\s*(\S+)', cmd)
+                if hm: multiline = True
                 if hm: marker = hm.group(1); mode_input = True
-                elif re.match(r'^cat\s*>\s*\S+\s*$', cmd): mode_input = True; marker = None
+                elif re.match(r'^cat\s*>\s*\S+\s*$', cmd): mode_input = True; marker = None; multiline = True
                 continue
             if mode_input:
                 if marker and raw.strip() == marker:
@@ -157,11 +178,11 @@ def render_code(lang, body, in_details):
                 if raw.strip() == '': rows.append('<span class="l"></span>'); copy.append(''); continue
                 hm = re.search(r'<<\s*(\S+)', raw)
                 rows.append('<span class="l cmdline">%s%s</span>' % (hl_cmd(raw), annotation(an))); copy.append(raw)
-                if hm: marker = hm.group(1); mode_input = True
-                elif re.match(r'^cat\s*>\s*\S+\s*$', raw): mode_input = True
+                if hm: marker = hm.group(1); mode_input = True; multiline = True
+                elif re.match(r'^cat\s*>\s*\S+\s*$', raw): mode_input = True; multiline = True
                 continue
             rows.append('<span class="l out">%s%s</span>' % (esc(raw), annotation(an)))
-        cp = '\n'.join(copy).strip('\n')
+        cp = join_cmds(copy, multiline)
         cls = 'term script' if script else 'term'
         if script: title = 'Commando'
         return '<div class="%s"><div class="bar"><i></i><i></i><i></i><span>%s</span>%s</div><pre>%s</pre></div>' % (cls, esc(title), copy_btn(cp), ''.join(rows))
@@ -256,6 +277,9 @@ def image_uri(chapdir, fn):
         WARN.append('Afbeelding ontbreekt: %s/%s' % (chapdir, fn)); return ''
     key = hashlib.md5(open(path, 'rb').read()).hexdigest()
     if key in IMG_CACHE: return IMG_CACHE[key]
+    if fn.lower().endswith('.svg'):
+        uri = 'data:image/svg+xml;base64,' + base64.b64encode(open(path, 'rb').read()).decode()
+        IMG_CACHE[key] = uri; return uri
     cp = os.path.join(CACHE, key + '.webp')
     if not os.path.exists(cp):
         im = Image.open(path)

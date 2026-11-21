@@ -4,7 +4,7 @@
 ## Command line Interface (CLI)
 Bij het opstarten van de virtuele machine wordt alleen een zwart scherm weergegeven met wat witte tekst:
 
-![CLI_Login_And_Welcome](./assets/CLI_Login_And_Welcome.png)
+![CLI_Login_And_Welcome](./assets/CLI_Login_And_Welcome.svg)
 
 Je zal merken dat er geen muisaanwijzer beschikbaar is. We gebruiken alleen maar ons toetsenbord als invoerapparaat. Deze omgeving wordt een command line interface (CLI) genoemd. Er is geen graphical user interface (GUI) aanwezig in Ubuntu-server. Een van de redenen waarom ze hiervoor hebben gekozen, is omdat het hebben van geen GUI systeembronnen bespaart en het aanvalsoppervlak verkleint. Een CLI is ook bewezen een zeer efficiënte en betrouwbare manier van werken met een besturingssysteem en zijn diensten te zijn.
 
@@ -29,7 +29,7 @@ Het `~`-symbool is een afkorting van de homefolder van de ingelogde gebruiker (i
 
 [Linux prompt definitie](http://www.linfo.org/prompt.html#:~:text=A%20commd%20prompt%2C%20also%20referred,terminal%20window%20by%20a%20shell.)
 
-![sandwich](./assets/sandwich.png)
+![sudo-broodje](./assets/sudo-broodje.svg)
 
 
 ## Commando's, argumenten en opties

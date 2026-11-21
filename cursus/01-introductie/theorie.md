@@ -38,6 +38,8 @@ Samen met de GNU-tools vormde de Linux-kernel een volledig, vrij besturingssyste
 ## Linux-distributies
 Linux-distributies (kortweg distro's) bundelen de Linux-kernel met GNU-tools, een pakketbeheerder en andere software, en vereenvoudigen zo het installeren van GNU/Linux en andere apps op je computer. Bekende distro's zijn Ubuntu, Debian, Fedora, Red Hat Enterprise Linux (RHEL), Arch Linux en Oracle Linux. Ook de gratis RHEL-varianten AlmaLinux en Rocky Linux zijn populair, als opvolgers van CentOS Linux (dat in 2024 stopte). Omdat Linux erg schaalbaar is, zijn er ook speciale distro's voor bepaalde doelen, bijvoorbeeld Clonezilla (schijven klonen).
 
+![distro-hoppen](./assets/distro-hoppen.svg)
+
  [Unix vs Linux (Eerste 10:30 minuten)](https://www.youtube.com/watch?v=jowCUo_UGts)  
  [Wat is linux?](https://www.youtube.com/watch?v=zA3vmx0GaO8)  
  [High level overview Linux](https://www.linux.com/what-is-linux/)  

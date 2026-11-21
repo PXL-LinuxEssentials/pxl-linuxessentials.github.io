@@ -22,7 +22,7 @@ Maak in je homedirectory de volgende structuur: `PXL/Courses/S1/LinuxEss`
 
 Doe dit door naar elke gemaakte map te gaan om de volgende te maken.
 
-![Oef_2](./assets/Ch4_Task2.png)
+![Oef_2](./assets/Ch4_Task2.svg)
 
 Je hebt deze structuur nodig in een volgende oefening.
 
@@ -64,7 +64,7 @@ Ga terug naar je homefolder. Terwijl je in je homefolder blijft, maak je de map 
 
 Gebruik tab-completion wanneer je maar kunt!
 
-![Oef_3](./assets/Ch4_Task3.png)
+![Oef_3](./assets/Ch4_Task3.svg)
 
 ::: details Oplossing tonen
 ```
@@ -89,7 +89,7 @@ Maak de map _WindowsEss_ als een submap van _S1_ terwijl je in je homefolder ben
 
 Gebruik tab-completion wanneer je maar kunt!
 
-![Oef_4](./assets/Ch4_Task4.png)
+![Oef_4](./assets/Ch4_Task4.svg)
 
 ::: details Oplossing tonen
 ```
@@ -113,7 +113,7 @@ Let op de spatie in de bestandsnaam!
 
 Je moet in de manpage zoeken naar de optie om te gebruiken. Het maakt alle bovenliggende mappen die nodig zijn. Hier betekent het dat om de map _VMware Workstation_ te maken, de server eerst alle andere mappen zal maken als ze nog niet bestaan (PXL, Software en Virtualization).
 
-![Oef_5](./assets/Ch4_Task5.png)
+![Oef_5](./assets/Ch4_Task5.svg)
 
 ::: details Oplossing tonen
 ```

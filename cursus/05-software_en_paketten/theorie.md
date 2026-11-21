@@ -373,6 +373,8 @@ Het bestand heeft zijn oorspronkelijke grootte teruggekregen en de inhoud kan op
 ### tar
 Als we meerdere bestanden en mappen in één bestand willen samenvoegen, kunnen we tar gebruiken. We gebruiken de optie -c om de tarfile te maken.
 
+![tar-commando](./assets/tar-commando.svg)
+
 ```bash
 student@linux-ess:~$ tree
 .

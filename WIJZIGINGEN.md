@@ -87,3 +87,8 @@ De oorspronkelijke vragen over nginx, `scp`, `tar`, `wget`, `Ctrl+F5` hoorden ni
 - Fout in `10-rechten/theorie.md` hersteld (ontbrekende sluit-fence), waardoor commentaarregels als titels verschenen.
 - Decoratieve afbeeldingen verwijderd (tux, distro-grap, tar-joke, chmod_joke, hoofdstukheaders in wat-zal-je-leren.md). Functionele screenshots en diagrammen blijven.
 - Nieuw: eigen SVG-illustratie per hoofdstuk in de hero (`_bouw/art.py`).
+
+## Update: figuren en grapjes
+- Alle boomdiagrammen van hoofdstuk 4 (incl. oefeningen), het virtualisatieschema (ch02), de loginscreenshot (ch03) en het mappenoverzicht (ch04) zijn vervangen door zelfgemaakte SVG's in een rustige stijl. Voor/na-figuren tonen nu twee panelen met het gebruikte commando.
+- Grapjes vervangen door eigen terminal-grapjes: sudo-broodje (ch03), vim afsluiten (ch06), tar-opties (ch05), chmod 777 (ch10), distro hoppen (ch01).
+- Alle figuren worden gegenereerd door `bouw/figuren.py` (`python bouw/figuren.py`).

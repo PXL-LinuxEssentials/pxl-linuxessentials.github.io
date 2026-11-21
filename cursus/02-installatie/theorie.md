@@ -6,7 +6,7 @@ Om servers te installeren die diensten aanbieden (zoals een minecraft server!) h
 
 Virtualisatie is een concept waarbij je een computersysteem met een besturingssysteem virtueel op een ander systeem kunt laten draaien. Dit maakt het mogelijk om meerdere **gast**-besturingssystemen, elk met hun eigen virtuele hardware, op één **host**-systeem (het fysieke toestel met het echte besturingssysteem) te laten draaien.
 
-![Virtualisatie](./assets/Virtualization.png)
+![Virtualisatie](./assets/Virtualization.svg)
 
 In deze cursus zullen we dus een lokale Virtuele Machine installeren als backup voor een Cloud instance waarin we normaal gezien zullen werken.
 

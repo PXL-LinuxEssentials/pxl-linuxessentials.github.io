@@ -23,13 +23,13 @@ In Windows begint een absoluut pad met C:\.... In Linux gebruiken we geen schijf
 
 De map student is onze huidige werkmap. Deze map is een submap van de map home die op zijn beurt een submap is van de root directory /.
 
-![DirectoryHierarchy](./assets/Ch4_CleanInstall.png)
+![DirectoryHierarchy](./assets/Ch4_CleanInstall.svg)
 
 Herinner je je de prompt die een actief pad bevatte? Het `~`-teken was een afkorting voor de map `/home/student`. Dit is de **homefolder**. Elke gebruiker krijgt zijn eigen homefolder in de map `/home`, net als in Windows, waar elke gebruiker een eigen map heeft onder `C:\Users`. Een gebruiker heeft alle machtigingen (lezen, schrijven, uitvoeren) in zijn eigen homefolder. Buiten die map heeft hij vaak enkel leesrechten.
 
 
 
-![Linux root Filesystem uitgelegd](./assets/Linux_Filesystem.jpeg)
+![Linux-root-filesystem](./assets/Linux_Filesystem.svg)
 
 
 
@@ -71,7 +71,7 @@ emptyfile
 
 Het commando touch wordt hier gebruikt om een leeg bestand aan te maken met de naam emptyfile. Het commando wordt verderop in dit hoofdstuk nog uitgelegd.
 
-![DirectoryEmptyFile](./assets/Ch4_Emptyfile.png)
+![DirectoryEmptyFile](./assets/Ch4_Emptyfile.svg)
 
 We zouden ook het commando cd - kunnen gebruiken. Dit navigeert terug naar de folder waar je je bevond vooraleer je naar deze folder kwam:
 
@@ -162,7 +162,7 @@ Bij het gebruik van commando's moeten we vaak paden naar bepaalde mappen of best
 
 Paden worden gebruikt om naar bestanden en mappen op het bestandssysteem te wijzen. We kunnen twee soorten paden gebruiken: relatieve en absolute paden.
 
-![Directories_Downloads_Steam_games_teacher](./assets/Ch4_Downloads_Steam_games_teacher.png)
+![Directories_Downloads_Steam_games_teacher](./assets/Ch4_Downloads_Steam_games_teacher.svg)
 
 
 
@@ -301,7 +301,7 @@ Niet alleen de bestanden, maar ook de mappen: die zijn gewoon speciale bestanden
 
 
 ### Mappen maken (mkdir)
-![Directories_Downloads_Steam_games_teacher_backups](./assets/Ch4_Downloads_Steam_games_teacher_backups.png)
+![Directories_Downloads_Steam_games_teacher_backups](./assets/Ch4_Downloads_Steam_games_teacher_backups.svg)
 
 Om nieuwe mappen aan te maken kunnen we het commando mkdir (make directory) gebruiken. Dit commando neemt een pad als argument:
 
@@ -350,7 +350,7 @@ Zoals eerder vermeld is alles in Linux hoofdlettergevoelig, ook bij het maken va
 
 
 ### Een leeg bestand maken (touch)
-![Directories_fileOne_fileTwo](./assets/Ch4_fileOne_fileTwo.png)
+![Directories_fileOne_fileTwo](./assets/Ch4_fileOne_fileTwo.svg)
 
 Een eenvoudige manier om een leeg bestand te maken is `touch`. Het voorbeeld maakt twee bestanden en toont ze daarna:
 
@@ -378,7 +378,7 @@ Beide bestanden zijn leeg, zoals je ziet aan de bestandsgrootte (0). In hoofdstu
 
 
 ### Bestanden met spaties in de naam
-![Directories_Ch4_filenameWithSpaces](./assets/Ch4_filenameWithSpaces.png)
+![Directories_Ch4_filenameWithSpaces](./assets/Ch4_filenameWithSpaces.svg)
 
 Een spatie scheidt in de shell de argumenten van elkaar. `touch File One` maakt dus **twee** bestanden: `File` en `One`. Willen we één bestand met een spatie in de naam, dan plaatsen we de naam tussen aanhalingstekens:
 
@@ -420,7 +420,7 @@ Je kunt ook enkele aanhalingstekens gebruiken (`touch 'File Two'`) of een backsl
 
 
 ### Bestanden verplaatsen (mv)
-![Directories_Ch4_MoveAFile](./assets/Ch4_MoveAFile.png)
+![Directories_Ch4_MoveAFile](./assets/Ch4_MoveAFile.svg)
 
 Om een bestand naar een andere map te verplaatsen gebruiken we `mv` (*move*). Dit commando heeft twee argumenten: de bron en de bestemming:
 
@@ -434,7 +434,7 @@ student@linux-ess:~$ ls aFolder
 aFile
 ```
 
-![Directories_Ch4_MoveAndRenameFile](./assets/Ch4_MoveAndRenameFile.png)
+![Directories_Ch4_MoveAndRenameFile](./assets/Ch4_MoveAndRenameFile.svg)
 
 Aangezien het tweede argument een doelbestand of -map is, kunnen we deze opdracht ook gebruiken om een bestand te hernoemen. In het onderstaande voorbeeld gebruiken we het commando mv om het bestand terug te verplaatsen naar de homefolder, maar ook om het te hernoemen:
 
@@ -447,7 +447,7 @@ student@linux-ess:~/aFolder$ ls ~
 aFolder  backups  Downloads  emptyfile  File  fileOne  fileTwo  'File Two'  newFileName  One
 ```
 
-![Directories_Ch4_RenameFileWithMV.png](./assets/Ch4_RenameFileWithMV.png)
+![Directories_Ch4_RenameFileWithMV.png](./assets/Ch4_RenameFileWithMV.svg)
 
 Bij het hernoemen van slechts één bestand of map is mv het voorkeurscommando dat je wilt gebruiken. De voorbeelden gebruikten beide bestanden, maar dezelfde logica werkt ook voor het hernoemen en verplaatsen van mappen.
 
@@ -462,7 +462,7 @@ backups  Downloads  emptyfile  File  fileOne  fileTwo  'File Two'  myFile  myFol
 
 
 ### Bestanden kopiëren (cp)
-![copy_emptyfile_emptyfilebackup](./assets/Ch4_copy_emptyfile_emptyfilebackup.png)
+![copy_emptyfile_emptyfilebackup](./assets/Ch4_copy_emptyfile_emptyfilebackup.svg)
 
 Om een kopie van een bestand te maken kunnen we het commando cp (copy) als volgt gebruiken:
 
@@ -479,7 +479,7 @@ Beide argumenten zijn paden. Het eerste pad is het oorspronkelijke bestand/map. 
 
 
 ### Kopiëren naar een andere map
-![Ch4_copy_myfile_emptyfilebkp](./assets/Ch4_copy_myfile_emptyfilebkp.png)
+![Ch4_copy_myfile_emptyfilebkp](./assets/Ch4_copy_myfile_emptyfilebkp.svg)
 
 Het onderstaande voorbeeld laat ons zien hoe we de argumenten in het commando cp kunnen gebruiken om bestanden of mappen naar een andere map te kopiëren. In dit voorbeeld kopiëren we het bestand met de naam myFile naar de map myFolder met behulp van een relatief pad. We kopiëren ook het bestand met de naam emptyfile naar de map met de naam myFolder en geven het de nieuwe naam emptyFile.bkp. Dit doen we met behulp van een absoluut pad.
 
@@ -505,7 +505,7 @@ Je kunt zowel relatieve als absolute paden gebruiken in het commando `cp`, voor 
 
 
 ### Recursief kopiëren
-![Ch4_copy_recursive_myfolderbackup](./assets/Ch4_copy_recursive_myfolderbackup.png)
+![Ch4_copy_recursive_myfolderbackup](./assets/Ch4_copy_recursive_myfolderbackup.svg)
 
 Om volledige mappen (met alle submappen en files in deze map) te kopiëren moeten we de optie -r (recursief) gebruiken:
 
@@ -539,7 +539,7 @@ cp: overwrite 'myFolder/emptyFile.bkp'? y
 
 
 ### Bestanden hernoemen (rename)
-![Ch4_Rename](./assets/Ch4_Rename.png)
+![Ch4_Rename](./assets/Ch4_Rename.svg)
 
 We zagen dat we het commando mv konden gebruiken om bestanden en mappen te hernoemen. Dit werkt en is vaak heel eenvoudig, maar wanneer je bestanden in bulk moet hernoemen, wil je misschien een andere aanpak overwegen. Het commando rename is speciaal ontworpen om meerdere bestanden en mappen met één commando te hernoemen. Om dit te doen gebruikt het een reguliere expressie/regular expression (Regex). Een Regex is een reeks tekens die een zoekpatroon definiëren. We zullen later in deze cursus meer leren over reguliere expressies. Het gebruikt dit zoekpatroon om bepaalde wijzigingen aan te brengen in de bestandsnamen:
 
@@ -565,7 +565,7 @@ Er gebeurt veel in het bovenstaande voorbeeld. Stap voor stap:
 
 We kunnen `rename` ook gebruiken om de bestandsextensie te wijzigen:
 
-![Ch4_Rename_Extentions](./assets/Ch4_Rename_Extentions.png)
+![Ch4_Rename_Extentions](./assets/Ch4_Rename_Extentions.svg)
 
 ```bash
 student@linux-ess:~/renamedir$ ls
@@ -579,7 +579,7 @@ Merk je op dat we een `\` (backslash) voor de punt in het zoekpatroon plaatsen? 
 
 We kunnen ook het commando rename gebruiken om meerdere bestandsextensies tegelijk te wijzigen:
 
-![Ch4_Rename_Extentions_Case_Insensitive](./assets/Ch4_Rename_Extentions_Case_Insensitive.png)
+![Ch4_Rename_Extentions_Case_Insensitive](./assets/Ch4_Rename_Extentions_Case_Insensitive.svg)
 
 ```bash
 student@linux-ess:~/renamedir$ ls
@@ -609,7 +609,7 @@ student@linux-ess:~$ file /etc/passwd
 ## Bestanden en mappen verwijderen (rm)
 Lege mappen verwijder je met `rmdir`. Dat commando weigert mappen die nog bestanden of mappen bevatten.
 
-![Ch4_rm_file](./assets/Ch4_rm_file.png)
+![Ch4_rm_file](./assets/Ch4_rm_file.svg)
 
 Voor het verwijderen van bestanden (en mappen) gebruiken we meestal `rm`:
 
@@ -621,7 +621,7 @@ student@linux-ess:~/renamedir$ ls
 aFile  aFile.doc  adocument.doc  anotherdocument.doc  backup.doc  prodocuments.doc  profiles.doc  yaay.doc
 ```
 
-![Ch4_rm_rf](./assets/Ch4_rm_rf.png)
+![Ch4_rm_rf](./assets/Ch4_rm_rf.svg)
 
 `rm` heeft ook verschillende opties. De meest gebruikte combinatie is `rm -rf`:
 

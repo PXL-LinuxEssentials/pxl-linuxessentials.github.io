@@ -396,7 +396,7 @@ Tekst van **buiten** de terminal (bv. uit een oefening) plak je niet met nano, m
 
 Een andere populaire teksteditor op Linux is `vi`. Die is erg krachtig, maar heeft een steile leercurve. In deze cursus behandelen we `vi` niet, maar voel je vrij om zelf te experimenteren. `vim` is een uitgebreidere variant van `vi`, die ook op je systeem geïnstalleerd kan zijn. Om meer te leren is er een interactieve tutor: het commando `vimtutor`.
 
-![Vim voor het eerst geopend](./assets/vim.jpeg)
+![vim-afsluiten](./assets/vim-afsluiten.svg)
 
 ::: warning Vast in vim?
 Iedereen zit een keer vast in `vim`. Zo kom je eruit: druk op {{Esc}}, typ `:q!` en druk op `Enter` (afsluiten **zonder** opslaan). Wil je wel opslaan en afsluiten: {{Esc}}, dan `:wq` en `Enter`.

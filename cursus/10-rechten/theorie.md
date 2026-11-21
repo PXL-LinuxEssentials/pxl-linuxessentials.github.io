@@ -90,6 +90,8 @@ student@linux-ess:~$ ls -l config
 
 De laatste optie is sneller wanneer je machtigingen volledig moet herschrijven (omdat je de bestaande machtigingen niet hoeft te controleren, maar gewoon overschrijven). De eerste kan praktisch zijn voor het aanbrengen van snelle wijzigingen, zoals het uitvoerbaar maken van een bestand.
 
+![chmod-777](./assets/chmod-777.svg)
+
 ## Van eigenaar veranderen (chgrp, chown)
 Naast het wijzigen van de machtigingen van een bestand, moet je ook wijzigen op wie deze machtigingen van toepassing zijn, door de gebruiker of groep te wijzigen die eigenaar is van het bestand. Je hebt sudo nodig om bestanden toe te wijzen aan verschillende gebruikers/groepen.
 

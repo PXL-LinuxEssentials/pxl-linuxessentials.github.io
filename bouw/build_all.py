@@ -509,7 +509,7 @@ def main():
                 if info['uur']: chips += '<span class="chip">⏱ ± %s uur</span>' % info['uur']
                 hero = ('<section class="hero">'+art.hero_art(num)+'<div class="kicker">Linux · Hoofdstuk %s</div><h1>%s</h1><p>%s</p><div class="chips">%s<span class="chip" id="chips-%s"></span></div></section>'
                         % (num, esc(ch['title']), esc(ch['blurb']), chips, num))
-                pages_html.append(page_shell(pid, '', hero + lead, body + [tiles], [], pgr(num, k), 'p-start'))
+                pages_html.append(page_shell(pid, '', hero + lead, body, [], pgr(num, k), 'p-start'))
             elif k == 'theorie':
                 h1, lead, body, toc = build_generic(pid, d, read(os.path.join(base, 'theorie.md')))
                 pages_html.append(page_shell(pid, title_block(h1 or ch['title'], 'Theorie'), lead, body, toc, pgr(num, k)))

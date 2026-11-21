@@ -259,6 +259,27 @@ def prompt_fig():
     # let op: placeholder-commando ls na de cursor wordt niet getoond
     write('03-command_line_interface_(CLI)', 'prompt.svg', svg(W, H, ''.join(o)))
 
+
+def tar_fig():
+    W = 760; PAD = 24
+    rows = [('UITPAKKEN', 'tar -xzvf archief.tar.gz', [('x', 'Xtra'), ('z', 'Zakken'), ('v', 'Vol'), ('f', 'Fruit')], 'e<b>x</b>tract = uitpakken', '#dff1ed', '#98cfc6', '#17504a'),
+            ('INPAKKEN', 'tar -czvf archief.tar.gz map/', [('c', 'Cadeautjes'), ('z', 'Zijn'), ('v', 'Voor'), ('f', 'Feestjes')], '<b>c</b>reate = aanmaken', '#fbeccd', '#e0b45a', '#6b4a06')]
+    o = ['<rect x="1" y="1" width="%d" height="284" rx="16" fill="#fff" stroke="#dbe3ee" stroke-width="1.6"/>' % (W - 2)]
+    y = 24
+    for title, cmd, words, note, fill, stroke, col in rows:
+        o.append('<text x="%d" y="%d" font-family="%s" font-size="12.5" font-weight="800" letter-spacing="1.4" fill="#94a3b8">%s</text>' % (PAD, y + 12, FONT, title))
+        cw = tw(cmd, 14) + 22
+        o.append('<rect x="%d" y="%d" width="%.1f" height="26" rx="8" fill="#1e293b"/><text x="%d" y="%d" font-family="%s" font-size="14" fill="#e2e8f0">%s</text>' % (PAD + 100, y - 2, cw, PAD + 111, y + 16, MONO, esc(cmd)))
+        x = PAD
+        for l, w in words:
+            bw = tw(w, 17) + 58
+            o.append('<rect x="%.1f" y="%d" width="%.1f" height="44" rx="12" fill="%s" stroke="%s" stroke-width="1.6"/><text x="%.1f" y="%d" font-family="%s" font-size="20" font-weight="800" fill="%s">%s</text><text x="%.1f" y="%d" font-family="%s" font-size="17" font-weight="600" fill="%s">%s</text>' % (x, y + 40, bw, fill, stroke, x + 14, y + 69, MONO, col, l, x + 38, y + 68, FONT, col, w[1:] if False else w))
+            x += bw + 10
+        o.append('<text x="%.1f" y="%d" font-family="%s" font-size="13.5" fill="#64748b">%s</text>' % (x + 6, y + 68, FONT, note.replace('<b>', '').replace('</b>', '')))
+        y += 104
+    o.append('<text x="%d" y="%d" font-family="%s" font-size="14" font-style="italic" fill="#64748b">De f (file) staat altijd als laatste: daarna volgt de bestandsnaam.</text><text x="%d" y="%d" font-family="%s" font-size="14" font-style="italic" fill="#64748b">Met -t (toon) zie je wat erin zit, zonder uit te pakken.</text>' % (PAD, 240, FONT, PAD, 262, FONT))
+    write('05-software_en_paketten', 'tar-commando.svg', svg(W, 286, ''.join(o)))
+
 # ------------------------------------------------------------------ grapjes
 def joke(name, ch, title, lines, caption, w=760, fs=15):
     h, body = term(lines, w=w, fs=fs, title=title)
@@ -273,9 +294,7 @@ def jokes():
     joke('vim-afsluiten.svg', '06-bestandsinhoud', 'vim', [
         ('~', B), ('~', B), ('~                       Je opent Vim voor het eerst…', D), ('~', B), (':exit', Y), ('<tspan fill="%s">E492: Not an editor command: exit</tspan>' % R, G), (':quit', Y), ('<tspan fill="%s">E37: No write since last change (add ! to override)</tspan>' % R, G), (':wq', Y), ('<tspan fill="%s">"notities.txt" 3L, 41B written   — vrijheid.</tspan>' % Gr, G)],
         'Vim afsluiten: de eerste echte hindernis van elke Linux-student.')
-    joke('tar-commando.svg', '05-software_en_paketten', 'student@linux-ess', [
-        (P('tar -xzvf archief.tar.gz'), G), ('# x = extract, z = gzip, v = verbose, f = file', D), ('', G), (P('tar --help'), G), ('<tspan fill="%s">Usage: tar [OPTION…] [FILE]…</tspan>   (… en dan toch googelen)' % Y, G), ('', G)],
-        'Niemand onthoudt de opties van tar. Iedereen kent wel iemand die dat beweert.')
+    tar_fig()
     joke('chmod-777.svg', '10-rechten', 'student@linux-ess', [
         (P('./script.sh'), G), ('bash: ./script.sh: Permission denied', R), (P('chmod 777 script.sh'), G), (P('./script.sh'), G), ('<tspan fill="%s">Het werkt!</tspan>   (en nu mag iedereen alles)' % Gr, G)],
         '777 lost je probleem op en maakt er een veiligheidsprobleem bij. Gebruik de kleinste rechten die werken.')

@@ -391,3 +391,14 @@ body.side-on .side{transform:none}
 .progressbar i{background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple))}
 [data-theme=dark] .hero{background:linear-gradient(120deg,#2c5a60 0%,#34507a 55%,#4d4779 100%)}
 [data-theme=dark] .page .pagetitle{background:linear-gradient(120deg,#34507a,#3e6573)}
+/* ---- nog rustiger: tabs en titelbanners ---- */
+nav.tabs a.active{background:color-mix(in srgb,var(--tabc,var(--blue)) 15%,var(--surface));color:var(--tabc,var(--blue));border-color:color-mix(in srgb,var(--tabc,var(--blue)) 35%,transparent);box-shadow:none}
+.hero{background:linear-gradient(120deg,#56808a 0%,#5c7596 60%,#716f9a 100%)}
+.page .pagetitle{background:linear-gradient(120deg,#5c7596,#6a8f9b)}
+.page[data-pid$=oefeningen] .pagetitle{background:linear-gradient(120deg,#a98363,#b89a73)}
+.page[data-pid$=kennistoets] .pagetitle{background:linear-gradient(120deg,#7d739f,#9a7390)}
+.page[data-pid$=overzicht] .pagetitle{background:linear-gradient(120deg,#9a7390,#b38d77)}
+.page[data-pid^="12-"] .pagetitle,.page[data-pid$=extra-vs] .pagetitle,.page[data-pid$=-extra] .pagetitle{background:linear-gradient(120deg,#6b9374,#5b8f8a)}
+.chcard .cardart{background:linear-gradient(120deg,#56808a,#5c7596 60%,#716f9a)}
+.tile.t4{background:linear-gradient(135deg,#9a7390,#b38d77)}
+[data-theme=dark] nav.tabs a.active{background:color-mix(in srgb,var(--tabc,var(--blue)) 22%,var(--surface))}

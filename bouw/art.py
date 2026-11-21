@@ -7,7 +7,7 @@ def win(inner):
             '<circle cx="30" cy="26" r="4" fill="#fca5a5"/><circle cx="44" cy="26" r="4" fill="#fde68a"/><circle cx="58" cy="26" r="4" fill="#86efac"/>' % (F, S)) + inner
 ART = {
 '01': '<circle cx="120" cy="80" r="56" %s/><ellipse cx="120" cy="80" rx="24" ry="56" %s/><path d="M64 80h112M74 52h92M74 108h92" %s/><circle cx="64" cy="80" r="7" %s/><circle cx="176" cy="80" r="7" %s/><circle cx="120" cy="24" r="7" %s/><circle cx="120" cy="136" r="7" %s/>' % (F,S,S,A,A,A,A),
-'02': '<rect x="44" y="20" width="90" height="30" rx="7" %s/><rect x="44" y="58" width="90" height="30" rx="7" %s/><rect x="44" y="96" width="90" height="30" rx="7" %s/><circle cx="62" cy="35" r="4" %s/><circle cx="62" cy="73" r="4" %s/><circle cx="62" cy="111" r="4" %s/><path d="M170 120a22 22 0 0 1 4-43 30 30 0 0 1 56 8 18 18 0 0 1-2 35z" %s/><path d="M200 112V92m-9 8 9-9 9 9" %s/>' % (F,F,F,A,A,A,F,S),
+'02': '<rect x="44" y="20" width="90" height="30" rx="7" %s/><rect x="44" y="58" width="90" height="30" rx="7" %s/><rect x="44" y="96" width="90" height="30" rx="7" %s/><circle cx="62" cy="35" r="4" %s/><circle cx="62" cy="73" r="4" %s/><circle cx="62" cy="111" r="4" %s/><path d="M160 120a22 22 0 0 1 4-43 30 30 0 0 1 56 8 18 18 0 0 1-2 35z" %s/><path d="M190 112V92m-9 8 9-9 9 9" %s/>' % (F,F,F,A,A,A,F,S),
 '03': win('<path d="M34 62l14 10-14 10" %s/><path d="M58 84h30" %s/><path d="M34 112h110" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/><rect x="100" y="64" width="12" height="22" %s/>' % (S,S,A)),
 '04': '<rect x="30" y="20" width="62" height="38" rx="6" %s/><path d="M61 58v62M61 82h40M61 120h40" %s/><rect x="101" y="68" width="56" height="30" rx="6" %s/><rect x="101" y="106" width="56" height="30" rx="6" %s/><path d="M176 84h40M176 122h40" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>' % (F,S,F,F),
 '05': '<path d="M60 56l60-28 60 28v62l-60 28-60-28z" %s/><path d="M60 56l60 28 60-28M120 84v62" %s/><path d="M96 42l60 28v26" %s/><path d="M200 24v26m-10-10 10 10 10-10" stroke="#fde68a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' % (F,S,S),
@@ -20,6 +20,6 @@ ART = {
 '12': '<path d="M120 20l14 38 40 4-31 26 10 40-33-22-33 22 10-40-31-26 40-4z" %s/><path d="M200 24v22M189 35h22M40 100v18M31 109h18" %s/><circle cx="210" cy="112" r="5" %s/>' % (F,S,A),
 }
 def hero_art(num):
-    return '<svg class="heroart" viewBox="0 0 240 160" aria-hidden="true">%s</svg>' % ART[num]
+    return '<svg class="heroart" viewBox="-14 -12 268 184" overflow="visible" aria-hidden="true">%s</svg>' % ART[num]
 def card_art(num):
     return hero_art(num).replace('heroart','cardart')

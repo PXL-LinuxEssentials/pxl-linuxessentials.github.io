@@ -236,10 +236,10 @@ def ch3():
 
 
 def prompt_fig():
-    fs = 34; cw = fs * 0.6; x0 = 40; y0 = 74
+    fs = 24; cw = fs * 0.6; x0 = 28; y0 = 52
     parts = [('student', '#86d6a0', 'gebruikersnaam', '#3f8a5c', 'username'), ('@', '#94a3b8', None, None, None), ('linux-ess', '#86d6a0', 'computernaam', '#3f8a86', 'hostname'),
              (':', '#94a3b8', None, None, None), ('~', '#7dd3fc', 'map', '#3b82a8', 'path'), ('$', '#94a3b8', None, None, None), (' ', '#fff', 'je commando', '#b8693f', 'command')]
-    W = 860; H = 176; o = ['<rect x="1" y="1" width="%d" height="%d" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="1.6"/>' % (W - 2, H - 2)]
+    W = 540; H = 134; o = ['<rect x="1" y="1" width="%d" height="%d" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="1.6"/>' % (W - 2, H - 2)]
     x = x0; cur = x0
     for t, col, lab, lc, _ in parts:
         w = len(t) * cw
@@ -249,13 +249,13 @@ def prompt_fig():
         if lab:
             if t == ' ': w = 11 * cw; bx0 = x; bx1 = x + w
             else: bx0 = x; bx1 = x + w
-            o.append('<path d="M%.1f 96 v10 H%.1f v-10" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' % (bx0 + 2, bx1 - 2, lc))
+            o.append('<path d="M%.1f 70 v8 H%.1f v-8" fill="none" stroke="%s" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>' % (bx0 + 2, bx1 - 2, lc))
             cx = (bx0 + bx1) / 2
-            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="15" font-weight="700" fill="%s">%s</text>' % (cx, 132, FONT, lc if False else '#e2e8f0', esc(lab)))
-            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="13" fill="%s">%s</text>' % (cx, 152, MONO, '#64748b', esc(_)))
+            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="12.5" font-weight="700" fill="%s">%s</text>' % (cx, 100, FONT, lc if False else '#e2e8f0', esc(lab)))
+            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="10.5" fill="%s">%s</text>' % (cx, 117, MONO, '#64748b', esc(_)))
         x += w
     # cursor
-    o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="#fde68a" opacity=".9"/>' % (cur, y0 - 27, cw * 0.7, 34))
+    o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="#fde68a" opacity=".9"/>' % (cur, y0 - 20, cw * 0.7, 25))
     # let op: placeholder-commando ls na de cursor wordt niet getoond
     write('03-command_line_interface_(CLI)', 'prompt.svg', svg(W, H, ''.join(o)))
 

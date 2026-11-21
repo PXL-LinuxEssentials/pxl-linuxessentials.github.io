@@ -21,7 +21,7 @@ CLIs zullen interessanter worden in het deel automatisering, iets dat moeilijker
 ## De prompt
 Na het inloggen krijg je de volgende regel in de CLI te zien. Dit wordt de prompt genoemd:
 
-![prompt](./assets/prompt.png)
+![prompt](./assets/prompt.svg)
 
 De prompt bestaat uit meerdere onderdelen die ons meer informatie geven over het systeem dat we gebruiken. We zien informatie over onze gebruiker en de hostnaam van de server waarop we zijn ingelogd.
 

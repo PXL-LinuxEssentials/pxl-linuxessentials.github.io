@@ -234,6 +234,31 @@ def ch3():
     ex = tag('1', 'gebruikersnaam', int(46 + 5 * lh - 30)) + tag('2', 'wachtwoord (je ziet niets verschijnen)', int(46 + 5 * lh - 1)) + tag('3', 'de prompt: je bent ingelogd', int(46 + 19 * lh - 22))
     write(c, 'CLI_Login_And_Welcome.svg', svg(860, int(h), body + ex))
 
+
+def prompt_fig():
+    fs = 34; cw = fs * 0.6; x0 = 40; y0 = 74
+    parts = [('student', '#86d6a0', 'gebruikersnaam', '#3f8a5c', 'username'), ('@', '#94a3b8', None, None, None), ('linux-ess', '#86d6a0', 'computernaam', '#3f8a86', 'hostname'),
+             (':', '#94a3b8', None, None, None), ('~', '#7dd3fc', 'map', '#3b82a8', 'path'), ('$', '#94a3b8', None, None, None), (' ', '#fff', 'je commando', '#b8693f', 'command')]
+    W = 860; H = 176; o = ['<rect x="1" y="1" width="%d" height="%d" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="1.6"/>' % (W - 2, H - 2)]
+    x = x0; cur = x0
+    for t, col, lab, lc, _ in parts:
+        w = len(t) * cw
+        if _ == 'command': cur = x + cw * 0.3
+        if t.strip():
+            o.append('<text x="%.1f" y="%d" xml:space="preserve" font-family="%s" font-size="%d" font-weight="700" fill="%s">%s</text>' % (x, y0, MONO, fs, col, esc(t)))
+        if lab:
+            if t == ' ': w = 11 * cw; bx0 = x; bx1 = x + w
+            else: bx0 = x; bx1 = x + w
+            o.append('<path d="M%.1f 96 v10 H%.1f v-10" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' % (bx0 + 2, bx1 - 2, lc))
+            cx = (bx0 + bx1) / 2
+            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="15" font-weight="700" fill="%s">%s</text>' % (cx, 132, FONT, lc if False else '#e2e8f0', esc(lab)))
+            o.append('<text x="%.1f" y="%d" text-anchor="middle" font-family="%s" font-size="13" fill="%s">%s</text>' % (cx, 152, MONO, '#64748b', esc(_)))
+        x += w
+    # cursor
+    o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="#fde68a" opacity=".9"/>' % (cur, y0 - 27, cw * 0.7, 34))
+    # let op: placeholder-commando ls na de cursor wordt niet getoond
+    write('03-command_line_interface_(CLI)', 'prompt.svg', svg(W, H, ''.join(o)))
+
 # ------------------------------------------------------------------ grapjes
 def joke(name, ch, title, lines, caption, w=760, fs=15):
     h, body = term(lines, w=w, fs=fs, title=title)
@@ -259,4 +284,4 @@ def jokes():
         'Distro hoppen: leerzaam, tijdrovend en bijzonder verslavend.')
 
 if __name__ == '__main__':
-    ch2(); ch3(); ch4(); jokes()
+    ch2(); ch3(); prompt_fig(); ch4(); jokes()

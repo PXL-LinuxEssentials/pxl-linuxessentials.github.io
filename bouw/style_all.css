@@ -463,3 +463,5 @@ ol.questions li::before{background:var(--surface2);color:var(--muted);border:1px
 .ex .badge{background:var(--surface2);color:var(--muted);border:1px solid var(--border);font-weight:700}
 .ex>header h2{font-weight:650}
 .q .qt .n,.q .n{background:var(--surface2)!important;color:var(--muted)!important;border:1px solid var(--border)}
+/* geen lettertype-ligaturen: '---' moet drie streepjes blijven */
+code,pre,kbd,samp,.term,.term *,.filebox pre,td,th{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}

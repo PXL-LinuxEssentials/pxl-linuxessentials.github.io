@@ -212,7 +212,7 @@ student@linux-ess:~$ grep -rn -i umask /etc/pam.d/ /etc/login.defs
 /etc/pam.d/common-session-noninteractive:27:session optional                    pam_umask.so
 ```
 
-Er staat geen `UMASK`-regel meer in `/etc/login.defs`, dus geldt de standaardwaarde `022`. Voor een gewone gebruiker met een eigen primaire groep (dezelfde naam als de gebruiker, zoals `student`) zet `pam_umask` de groepsbits gelijk aan de eigenaarbits. Zo wordt `022` dus `002`, en dat verklaart waarom `student` bestanden maakt met `rw-rw-r--`. Meer uitleg vind je in `man pam_umask`.
+Er staat geen `UMASK`-regel meer in `/etc/login.defs`. Zonder waarde laat `pam_umask` de umask ongemoeid: die erf je dan van het proces dat je sessie start (bij een login is dat `022`). Voor een gewone gebruiker met een eigen primaire groep (dezelfde naam als de gebruiker, zoals `student`) past `pam_umask` die waarde aan: de groepsbits worden gelijk aan de eigenaarbits. Zo wordt `022` dus `002`, en dat verklaart waarom `student` bestanden maakt met `rw-rw-r--`. Root houdt `022`. Meer uitleg vind je in `man pam_umask`.
 
 ::: info Oudere Ubuntu-versies
 In Ubuntu 24.04 en ouder staan `UMASK 022` en `USERGROUPS_ENAB yes` nog in `/etc/login.defs`. Je vindt daardoor op internet nog vaak de uitleg dat de systeembrede umask daar wordt ingesteld. In Ubuntu 26.04 staan die regels niet meer in dat bestand.

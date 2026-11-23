@@ -640,12 +640,13 @@ student@linux-ess:~$ stat -c '%a %n' /bin/passwd  # rechten in octaal tonen
 
 
 ## Overzicht van speciale bits
-| Toestemming  | Effect op bestanden                                                                                   | Effect op mappen |
-| ------------ | ----------------------------------------------------------------------------------------------------- | ---------------- |
-| u+s (setuid) | Het bestand wordt uitgevoerd als de eigenaar van het bestand, niet als de gebruiker die het uitvoerde | Geen effect      |
-| g+s (setgid) | Het bestand wordt uitgevoerd als de groep die het bestand bezit                                       | Bestanden die in de directory worden aangemaakt, krijgen dezelfde groepseigenaar als de directory |
-| o+t (sticky) | Geen effect                                                                                           | Gebruikers met schrijfrechten voor de directory kunnen alleen bestanden verwijderen die ze zelf bezitten; ze kunnen geen bestanden van anderen verwijderen of geforceerd opslaan |
+| Toestemming  | Effect op bestanden | Effect op mappen |
+| ------------ | ------------------- | ---------------- |
+| u+s (setuid) | Het bestand wordt uitgevoerd als de eigenaar van het bestand, niet als de gebruiker die het uitvoerde | *Geen effect* |
+| g+s (setgid) | *Het bestand wordt uitgevoerd als de groep die het bestand bezit* | Nieuwe bestanden in de map krijgen dezelfde groepseigenaar als de map |
+| o+t (sticky) | *Geen effect* | Gebruikers met schrijfrechten voor de map kunnen alleen bestanden verwijderen of hernoemen die ze zelf bezitten |
 
+*Cursief* = ter informatie: dit komt in de cursus niet verder aan bod.
 
 ## Access control lists
 Met **ACL's** (access control lists) deel je een bestand of map met **specifieke gebruikers of groepen**, zonder de eigenaar of de groep te wijzigen.

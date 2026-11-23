@@ -269,6 +269,10 @@ drwx------ 2 student student 4096 okt 15 16:25 newfolder2
 Als je de umask instelt met het commando, geldt dit alleen voor de huidige terminalsessie. Wanneer je de terminal sluit, wordt de standaardwaarde hersteld. Om de instelling permanent te maken, voeg je `umask <uw umask>` toe aan het `.profile`-bestand in je homefolder.
 :::
 
+::: warning Zet je umask terug
+Na deze voorbeelden staat de umask van je sessie nog op `077`. Alles wat je daarna maakt, krijgt dan strenge rechten, en dat geeft later `Permission denied` (bijvoorbeeld bij `/shares/ict`). Zet hem terug met `umask 002`, of open een nieuwe sessie.
+:::
+
 Let op: bestanden die root maakt, hebben andere rechten dan die van `student`.
 
 ```bash

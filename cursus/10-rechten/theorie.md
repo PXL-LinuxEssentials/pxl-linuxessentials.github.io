@@ -517,7 +517,7 @@ student@linux-ess:~$ ls -ld /shares/ict/
 drwxrwsr-t 3 root ict 4096 nov 27 15:05 /shares/ict/
 student@linux-ess:~$ su - liam
 Password: 
-liam@linux-ess:~$ cd /shares/ict              #Vergeet  sudo sysctl fs.protected_regular=1  niet -> zie lager
+liam@linux-ess:~$ cd /shares/ict              # samen bestanden overschrijven? zie fs.protected_regular lager
 liam@linux-ess:/shares/ict$ rm -rf testdir2/  #Liam kan Jacob's bestanden of mappen niet langer verwijderen
 rm: cannot remove 'testdir2/': Operation not permitted    
 liam@linux-ess:/shares/ict$ exit
@@ -572,38 +572,38 @@ student@linux-ess:/shares$ ls -ld ict3/
 drwxrwxr-x 2 root ict 4096 nov 27 15:20 ict3/
 ``` 
 
-Als je wilt dat de gebruikers van de groep ict samenwerken aan elkaars bestanden en je tegelijkertijd wilt dat ze elkaars bestanden niet kunnen verwijderen, moet je echter de kernelparameter fs.protected_regular=1 instellen.
+De sticky bit zorgt er al voor dat leden van `ict` elkaars bestanden niet kunnen **verwijderen**. Het **overschrijven** van een bestand van iemand anders is een apart geval. Dat regelt de kernelparameter `fs.protected_regular`. Op Ubuntu staat die standaard op `2`: in een sticky map waar de groep mag schrijven, kan je dan een bestand van een ander niet openen met `>` (aanmaken of overschrijven), ook al heeft de groep `rw`. Wil je dat samenwerken aan elkaars bestanden wel toelaten, zet de parameter dan op `1`.
+
+We vertrekken van de gedeelde map met setgid en sticky bit (`drwxrwsr-t`, dus `3775`). Jacob maakt een bestand aan waar de groep `ict` `rw` op heeft:
 
 ```bash
+student@linux-ess:~$ ls -ld /shares/ict/
+drwxrwsr-t 3 root ict 4096 nov 27 15:05 /shares/ict/
 student@linux-ess:~$ su - jacob
 Password:
 jacob@linux-ess:~$ cd /shares/ict/
 jacob@linux-ess:/shares/ict$ echo "This is Jacob's new text" > testfile2
 jacob@linux-ess:/shares/ict$ exit
-student@linux-ess:~$ ls -ld /shares/ict/
-drwxrwsr-t 3 root ict 4096 nov 27 15:05 /shares/ict/
 student@linux-ess:~$ su - liam
 Password: 
 liam@linux-ess:~$ cd /shares/ict/
-liam@linux-ess:/shares/ict$ ls -l
-total 8
--rw-rw-r-- 1 jacob jacob    0 nov 27 14:59 testdir
-drwxrwsr-x 2 jacob ict   4096 nov 27 15:03 testdir2
--rw-rw-r-- 1 jacob jacob    0 nov 27 14:59 testfile
--rw-rw-r-- 1 jacob ict      4 nov 27 15:03 testfile2
-liam@linux-ess:/shares/ict$ echo text from liam > testfile2     #Liam kan Jacob's bestanden niet veranderen.
--bash: testfile2 Permission denied
+liam@linux-ess:/shares/ict$ ls -l testfile2
+-rw-rw-r-- 1 jacob ict 4 nov 27 15:03 testfile2
+liam@linux-ess:/shares/ict$ echo text from liam > testfile2     # de groep heeft rw, maar fs.protected_regular=2 blokkeert dit
+-bash: testfile2: Permission denied
 liam@linux-ess:/shares/ict$ exit
-student@linux-ess:~$ sudo sysctl -a | grep regular  # kernelparameters met 'regular' tonen
+student@linux-ess:~$ sudo sysctl fs.protected_regular     # huidige waarde tonen
 fs.protected_regular = 2
-student@linux-ess:~$ sudo sysctl fs.protected_regular=1  # parameter aanzetten
+student@linux-ess:~$ sudo sysctl fs.protected_regular=1   # parameter op 1 zetten
 fs.protected_regular = 1
 student@linux-ess:~$ su - liam
 Password: 
 liam@linux-ess:~$ cd /shares/ict/
-liam@linux-ess:/shares/ict$ echo text from liam > testfile2     #Liam kan Jacob's bestanden veranderen.
-liam@linux-ess:~$ cat testfile2
+liam@linux-ess:/shares/ict$ echo text from liam > testfile2     # nu mag Liam het bestand van Jacob wel overschrijven
+liam@linux-ess:/shares/ict$ cat testfile2
 text from liam
+liam@linux-ess:/shares/ict$ rm testfile2                        # verwijderen blijft geblokkeerd door de sticky bit
+rm: cannot remove 'testfile2': Operation not permitted
 ```
 
 Als we de kernelparameter in de toekomst willen behouden, moeten we deze parameter wijzigen in het bestand /usr/lib/sysctl.d/99-protect-links.conf

@@ -201,16 +201,22 @@ student@linux-ess:~/course$ ls -l
 -rw-r--r-- 1 root    root    0 okt 15 16:44 file2
 ```
 
-Dit wordt uitgelegd door te kijken naar de systeembrede umask-instelling, te vinden in het bestand /etc/login.defs.
+Dit verschil heeft twee oorzaken:
+
+* **Bestanden die je met `sudo` maakt:** `sudo` gebruikt zelf een standaard umask van `022`. Daardoor krijgen ze geen schrijfrechten voor groep en anderen (`644`), ook al is jouw umask `002`.
+* **Je eigen umask (`002`):** die wordt bij het inloggen ingesteld door de PAM-module `pam_umask`. Je ziet dat in de PAM-configuratie van de sessie:
 
 ```bash
-student@linux-ess:~/course$ nano /etc/login.defs
-UMASK           022           #lijn 151
-...
-USERGROUPS_ENAB yes           #lijn 238
+student@linux-ess:~$ grep -rn -i umask /etc/pam.d/ /etc/login.defs
+/etc/pam.d/common-session:26:session optional                   pam_umask.so
+/etc/pam.d/common-session-noninteractive:27:session optional                    pam_umask.so
 ```
 
-Als je de instelling voor het hele systeem wilt wijzigen, kan je daar de waarde voor umask wijzigen. De standaard umask die is opgegeven is in ons voorbeeld degene die de rootgebruiker gebruikt (geen bewerkingsrechten voor iemand anders dan de eigenaar). De reden dat bestanden die door reguliere gebruikers worden gemaakt een extra w krijgen voor de groep, is de optie op lijn 238. Deze optie geeft aan dat voor elke niet-rootgebruiker die dezelfde gebruikers-id heeft als groeps-id (dus de primaire groep is ongewijzigd) de groep umask-bits wordt gewijzigd in de gebruiker umask-bits, wat het eerder geziene 002 als standaard umask voor de gebruiker student verklaart.
+Er staat geen `UMASK`-regel meer in `/etc/login.defs`, dus geldt de standaardwaarde `022`. Voor een gewone gebruiker met een eigen primaire groep (dezelfde naam als de gebruiker, zoals `student`) zet `pam_umask` de groepsbits gelijk aan de eigenaarbits. Zo wordt `022` dus `002`, en dat verklaart waarom `student` bestanden maakt met `rw-rw-r--`. Meer uitleg vind je in `man pam_umask`.
+
+::: info Oudere Ubuntu-versies
+In Ubuntu 24.04 en ouder staan `UMASK 022` en `USERGROUPS_ENAB yes` nog in `/etc/login.defs`. Je vindt daardoor op internet nog vaak de uitleg dat de systeembrede umask daar wordt ingesteld. In Ubuntu 26.04 staan die regels niet meer in dat bestand.
+:::
 
  Je kan de letternotatie ook gebruiken met umask:
 

@@ -132,13 +132,13 @@ Met `chmod` (change mode) wijzig je de rechten van een bestand of map. Er zijn t
 student@linux-ess:~$ touch test  
 student@linux-ess:~$ ls -l test
 -rw-rw-r-- 1 student student 0 Nov 11 13:11 test
-student@linux-ess:~$ chmod a+x test  
+student@linux-ess:~$ chmod a+x test  # x toevoegen voor iedereen (a = all)
 student@linux-ess:~$ ls -l test   
 -rwxrwxr-x 1 student student 0 okt  2 19:36 test  
-student@linux-ess:~$ chmod g-w test  
+student@linux-ess:~$ chmod g-w test  # w weghalen bij de groep
 student@linux-ess:~$ ls -l test   
 -rwxr-xr-x 1 student student 0 okt  2 19:36 test  
-student@linux-ess:~$ chmod go-rx test
+student@linux-ess:~$ chmod go-rx test  # r en x weghalen bij groep en others
 student@linux-ess:~$ ls -l test 
 -rwx------ 1 student student 0 okt  2 19:36 test
 ```
@@ -149,10 +149,10 @@ student@linux-ess:~$ ls -l test
 student@linux-ess:~$ touch config  
 student@linux-ess:~$ ls -l config  
 -rw-rw-r-- 1 student student    0 okt  2 19:36 config
-student@linux-ess:~$ chmod 600 config 
+student@linux-ess:~$ chmod 600 config  # rw- voor de eigenaar, niets voor de rest
 student@linux-ess:~$ ls -l config
 -rw------- 1 student student    0 okt  2 19:36 config
-student@linux-ess:~$ chmod 744 config
+student@linux-ess:~$ chmod 744 config  # rwx voor de eigenaar, r-- voor de rest
 student@linux-ess:~$ ls -l config
 -rwxr--r-- 1 student student    0 okt  2 19:36 config
 ```
@@ -173,7 +173,7 @@ total 4
 drwxrwxr-x 2 student student 4096 okt  2 19:36 folder
 -rw-rw-r-- 1 student student    0 okt  2 19:36 rights.jpg
 -rw-rw-rw- 1 student student    0 okt  2 19:36 test.txt
-student@linux-ess:~$ sudo chgrp -R it course/
+student@linux-ess:~$ sudo chgrp -R it course/  # groepseigenaar wijzigen naar it, recursief (-R)
 student@linux-ess:~$ ls -l course/
 total 4
 -rwxr--r-- 1 student it    0 okt  2 19:36 config
@@ -231,7 +231,7 @@ Standaard zijn nieuw gemaakte bestanden leesbaar voor alle gebruikers op het sys
 De rechten voor nieuwe bestanden en mappen stelt de **umask** in. Een umask is een **masker**: het geeft aan welke rechten je *niet* krijgt. Bekijk de huidige waarde met `umask`:
 
 ```bash
-student@linux-ess:~/course$ umask
+student@linux-ess:~/course$ umask  # huidige umask tonen
 0002
 ```
 
@@ -259,7 +259,7 @@ student@linux-ess:~/course$ mkdir newfolder1
 student@linux-ess:~/course$ ls -ld newfolder1
 drwxr-x--- 2 student student 4096 okt 15 16:25 newfolder1
  
-student@linux-ess:~/course$ umask 077 
+student@linux-ess:~/course$ umask 077  # groep en anderen krijgen niets
 student@linux-ess:~/course$ mkdir newfolder2
 student@linux-ess:~/course$ ls -ld newfolder2
 drwx------ 2 student student 4096 okt 15 16:25 newfolder2
@@ -277,7 +277,7 @@ Let op: bestanden die root maakt, hebben andere rechten dan die van `student`.
 
 ```bash
 student@linux-ess:~/course$ touch file
-student@linux-ess:~/course$ sudo touch file2
+student@linux-ess:~/course$ sudo touch file2  # bestand maken als root
 student@linux-ess:~/course$ ls -l
 -rw-rw-r-- 1 student student 0 okt 15 16:44 file
 -rw-r--r-- 1 root    root    0 okt 15 16:44 file2
@@ -289,7 +289,7 @@ Dit verschil heeft twee oorzaken:
 * **Je eigen umask (`002`):** die wordt bij het inloggen ingesteld door de PAM-module `pam_umask`, in combinatie met een instelling in `/etc/login.defs`:
 
 ```bash
-student@linux-ess:~$ grep -i -E 'usergroups' /etc/login.defs
+student@linux-ess:~$ grep -i -E 'usergroups' /etc/login.defs  # staat USERGROUPS_ENAB aan?
 USERGROUPS_ENAB yes
 ```
 
@@ -300,12 +300,12 @@ Je kan de umask ook in letters tonen en instellen:
 ```bash
 student@linux-ess:~$ umask
 0002
-student@linux-ess:~$ umask -S
+student@linux-ess:~$ umask -S  # umask in letters tonen
 u=rwx,g=rwx,o=rx
 student@linux-ess:~$ touch file3
 student@linux-ess:~$ ls -l file3
 -rw-rw-r-- 1 student student 0 Nov 11 14:01 file3
-student@linux-ess:~$ umask u=rwx,g=rx,o=
+student@linux-ess:~$ umask u=rwx,g=rx,o=  # umask instellen met letters
 student@linux-ess:~$ umask
 0027
 student@linux-ess:~$ umask -S
@@ -323,9 +323,9 @@ drwxr-x--- 2 student student 4096 Nov 11 14:04 folder4
 Wie samenwerkt, moet elkaars bestanden in een gedeelde map kunnen wijzigen. Beide gebruikers dezelfde primaire groep geven lijkt een oplossing, maar is een beveiligingsprobleem: ze krijgen dan ook toegang tot elkaars homefolder. Het voorbeeld hieronder toont dat probleem:
 
 ```bash
-student@linux-ess:~$ sudo groupadd it 
-student@linux-ess:~$ sudo useradd -m -g it -s /bin/bash liam
-student@linux-ess:~$ sudo passwd liam
+student@linux-ess:~$ sudo groupadd it  # groep it aanmaken
+student@linux-ess:~$ sudo useradd -m -g it -s /bin/bash liam  # -m homefolder · -g primaire groep · -s shell
+student@linux-ess:~$ sudo passwd liam  # wachtwoord van liam instellen
 student@linux-ess:~$ sudo useradd -m -g it -s /bin/bash jacob
 student@linux-ess:~$ sudo passwd jacob
 student@linux-ess:~$ ls -ld /home/liam  /home/jacob
@@ -333,7 +333,7 @@ drwxr-x--- 2 jacob it 4096 Nov 26 15:39 /home/jacob
 drwxr-x--- 2 liam  it 4096 Nov 26 15:32 /home/liam
 student@linux-ess:~$ sudo ls -l /home/jacob/.profile
 -rw-r--r-- 1 jacob it 807 Jan  6  2022 /home/jacob/.profile
-student@linux-ess:~$ su - liam
+student@linux-ess:~$ su - liam  # inloggen als liam
 Password:
 liam@linux-ess:~$ head -3 /home/jacob/.profile
 # ~/.profile: executed by the command interpreter for login shells.
@@ -349,7 +349,7 @@ We geven eerst beide gebruikers hun eigen primaire groep:
 ```bash
 student@linux-ess:~$ sudo groupadd liam
 student@linux-ess:~$ sudo groupadd jacob
-student@linux-ess:~$ sudo usermod -g liam liam
+student@linux-ess:~$ sudo usermod -g liam liam  # primaire groep van liam wijzigen
 student@linux-ess:~$ sudo usermod -g jacob jacob
 student@linux-ess:~$ ls -ld /home/liam  /home/jacob                  # homefolders zijn opnieuw afgeschermd (=privé)
 drwxr-x--- 2 jacob jacob 4096 Nov 26 15:39 /home/jacob
@@ -365,23 +365,23 @@ Het wijzigen van de primaire groep van een gebruiker verandert ook de groepseige
 We maken een groep voor de twee gebruikers om hen rechten te geven op een gedeelde map die we in de volgende stap zullen maken. We voegen de gebruikers ook toe aan deze nieuwe groep:
 
 ```bash
-student@linux-ess:~$ sudo groupadd ict
-student@linux-ess:~$ sudo usermod -aG ict liam
+student@linux-ess:~$ sudo groupadd ict  # groep voor de samenwerking
+student@linux-ess:~$ sudo usermod -aG ict liam  # -a: toevoegen aan een extra groep (zonder -a worden de andere extra groepen vervangen)
 student@linux-ess:~$ sudo usermod -aG ict jacob
-student@linux-ess:~$ grep ict /etc/group
+student@linux-ess:~$ grep ict /etc/group  # leden van de groep ict tonen
 ict:x:1005:liam,jacob
 ``` 
 
 We zullen de map maken die wordt gedeeld tussen de twee gebruikers en geven deze de nodige machtigingen:
 
 ```bash
-student@linux-ess:~$ sudo mkdir -p /shares/ict
+student@linux-ess:~$ sudo mkdir -p /shares/ict  # -p: maakt ook /shares aan
 student@linux-ess:~$ ls -ld /shares/ict
 drwxr-xr-x 2 root root 4096 Nov 26 15:58 /shares/ict
-student@linux-ess:~$ sudo chgrp ict /shares/ict
+student@linux-ess:~$ sudo chgrp ict /shares/ict  # groepseigenaar wordt ict
 student@linux-ess:~$ ls -ld /shares/ict
 drwxr-xr-x 2 root ict 4096 Nov 26 15:58 /shares/ict
-student@linux-ess:~$ sudo chmod g+w /shares/ict
+student@linux-ess:~$ sudo chmod g+w /shares/ict  # de groep mag schrijven
 student@linux-ess:~$ ls -ld /shares/ict
 drwxrwxr-x 2 root ict 4096 Nov 26 15:58 /shares/ict
 ```
@@ -585,9 +585,9 @@ drwxrwsr-x 2 jacob ict   4096 nov 27 15:03 testdir2
 liam@linux-ess:/shares/ict$ echo text from liam > testfile2     #Liam kan Jacob's bestanden niet veranderen.
 -bash: testfile2 Permission denied
 liam@linux-ess:/shares/ict$ exit
-student@linux-ess:~$ sudo sysctl -a | grep regular
+student@linux-ess:~$ sudo sysctl -a | grep regular  # kernelparameters met 'regular' tonen
 fs.protected_regular = 2
-student@linux-ess:~$ sudo sysctl fs.protected_regular=1
+student@linux-ess:~$ sudo sysctl fs.protected_regular=1  # parameter aanzetten
 fs.protected_regular = 1
 student@linux-ess:~$ su - liam
 Password: 
@@ -610,7 +610,7 @@ student@linux-ess:~$ ls -l /etc/shadow
 -rw-r----- 1 root shadow 2456 Nov 28  2022 /etc/shadow
 student@linux-ess:~$ ls -l /bin/passwd
 -rwsr-xr-x 1 root root 59976 Nov 24  2022 /bin/passwd
-student@linux-ess:~$ stat -c '%a %n' /bin/passwd
+student@linux-ess:~$ stat -c '%a %n' /bin/passwd  # rechten in octaal tonen
 4755 /bin/passwd 
 ```
 
@@ -629,7 +629,7 @@ Met **ACL's** (access control lists) deel je een bestand of map met **specifieke
 Voordat ACL's kunnen worden geïmplementeerd, moeten we het pakket installeren:
 
 ```bash
-student@linux-ess:~$ sudo apt install acl
+student@linux-ess:~$ sudo apt install acl  # ACL-pakket installeren
 ```
 
 Wanneer het is geïnstalleerd, moet het worden ingeschakeld wanneer het filesysteem wordt gemount. In onze Ubuntu installatie wordt de ACL-functionaliteit standaard geladen.
@@ -669,7 +669,7 @@ Met het commando setfacl kunnen we ACL's wijzigen (-m) of verwijderen (-x).
 student@linux-ess:~$ touch memo
 student@linux-ess:~$ ls -l memo
 -rw-rw-r-- 1 student student 0 Nov 11 14:15 memo
-student@linux-ess:~$ getfacl memo
+student@linux-ess:~$ getfacl memo  # ACL's tonen
 # file: memo
 # owner: student
 # group: student
@@ -677,8 +677,8 @@ user::rw-
 group::rw-
 other::r--
  
-student@linux-ess:~$ setfacl -m u:teacher:rw memo
-student@linux-ess:~$ setfacl -m g:it:rw memo
+student@linux-ess:~$ setfacl -m u:teacher:rw memo  # -m: ACL toevoegen of wijzigen voor gebruiker teacher
+student@linux-ess:~$ setfacl -m g:it:rw memo  # hetzelfde voor groep it
 student@linux-ess:~$ ls -l memo
 -rw-rw-r--+ 1 student student 0 Nov 11 14:15 memo
 ```
@@ -707,7 +707,7 @@ other::r--
  In het vorige voorbeeld zien we ook een regel met de optie mask. Deze optie bepaalt de maximale machtiging en heeft ook voorrang op de reguliere bestandsmachtigingen, behalve voor de eigenaar van het bestand. We kunnen deze parameter als volgt toevoegen:
 
 ```bash
-student@linux-ess:~$ setfacl -m m:r memo 
+student@linux-ess:~$ setfacl -m m:r memo  # mask op r-- zetten
 student@linux-ess:~$ getfacl memo 
 # file: memo
 # owner: student
@@ -728,7 +728,7 @@ student@linux-ess:~$ ls -l memo
 Als we een ACL-instelling uit het bestand willen verwijderen, kunnen we de optie -x gebruiken:
 
 ```bash
-student@linux-ess:~$ setfacl -x g:it memo
+student@linux-ess:~$ setfacl -x g:it memo  # -x: ACL van groep it verwijderen
 student@linux-ess:~$ getfacl memo 
 # file: memo
 # owner: student
@@ -748,7 +748,7 @@ student@linux-ess:~$ ls -l memo
 Als we alle ACL-instellingen uit een bestand willen verwijderen, kunnen we de optie -b gebruiken:
 
 ```bash
-student@linux-ess:~$ setfacl -b memo
+student@linux-ess:~$ setfacl -b memo  # -b: alle ACL's verwijderen
 student@linux-ess:~$ getfacl memo 
 # file: memo
 # owner: student

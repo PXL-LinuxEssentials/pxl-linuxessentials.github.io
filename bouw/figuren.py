@@ -280,6 +280,102 @@ def tar_fig():
     o.append('<text x="%d" y="%d" font-family="%s" font-size="14" font-style="italic" fill="#64748b">De f (file) staat altijd als laatste: daarna volgt de bestandsnaam.</text><text x="%d" y="%d" font-family="%s" font-size="14" font-style="italic" fill="#64748b">Met -t (toon) zie je wat erin zit, zonder uit te pakken.</text>' % (PAD, 240, FONT, PAD, 262, FONT))
     write('05-software_en_paketten', 'tar-commando.svg', svg(W, 286, ''.join(o)))
 
+# ------------------------------------------------------------------ rechten
+ON = ('#dff1ed', '#98cfc6', '#17504a')     # bit staat aan
+OFF = ('#ffffff', '#d5dde8', '#94a3b8')    # bit staat uit
+SPEC = ('#fdf0d3', '#e0a53a', '#6b4a06')   # speciale bit
+def cell(x, y, w, h, txt, sty, fs=22, mono=True, bold=800):
+    f, st, c = sty
+    return ('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="10" fill="%s" stroke="%s" stroke-width="1.6"/>'
+            '<text x="%.1f" y="%.1f" text-anchor="middle" font-family="%s" font-size="%d" font-weight="%d" fill="%s">%s</text>'
+            % (x, y, w, h, f, st, x + w / 2, y + h / 2 + fs * 0.35, MONO if mono else FONT, fs, bold, c, esc(txt)))
+def label(x, y, txt, fs=13, col='#64748b', anchor='middle', bold=600, mono=False, ital=False):
+    return ('<text x="%.1f" y="%.1f" text-anchor="%s" font-family="%s" font-size="%s" font-weight="%d" fill="%s"%s>%s</text>'
+            % (x, y, anchor, MONO if mono else FONT, fs, bold, col, ' font-style="italic"' if ital else '', esc(txt)))
+def head(x, y, txt):
+    return '<text x="%d" y="%d" font-family="%s" font-size="12.5" font-weight="800" letter-spacing="1.4" fill="#94a3b8">%s</text>' % (x, y, FONT, esc(txt))
+def chip(x, y, txt, fs=14):
+    w = tw(txt, fs) + 22
+    return ('<rect x="%.1f" y="%.1f" width="%.1f" height="26" rx="8" fill="#1e293b"/><text x="%.1f" y="%.1f" font-family="%s" font-size="%d" fill="#e2e8f0">%s</text>'
+            % (x, y, w, x + 11, y + 18, MONO, fs, esc(txt))), w
+def card(w, h): return '<rect x="1" y="1" width="%d" height="%d" rx="16" fill="#fff" stroke="#dbe3ee" stroke-width="1.6"/>' % (w - 2, h - 2)
+
+def rechten_lezen():
+    W, H = 760, 300; o = [card(W, H), head(24, 30, 'RECHTEN LEZEN')]
+    c, cw = chip(160, 14, '-rwxrw-r--'); o.append(c)
+    # type
+    o.append(label(24 + 36, 76, 'type', 13)); o.append(cell(24, 90, 72, 56, '-', OFF, 26)); o.append(label(24 + 36, 166, 'bestand', 12.5)); o.append(label(24 + 36, 183, '(d = map)', 12, '#94a3b8'))
+    groups = [('EIGENAAR', 'user · 1e naam', 'rwx'), ('GROEP', 'group · 2e naam', 'rw-'), ('ANDEREN', 'others · de rest', 'r--')]
+    x0 = 130; gw = 200; vals = [4, 2, 1]
+    for gi, (t, sub, bits) in enumerate(groups):
+        gx = x0 + gi * (gw + 10)
+        o.append(label(gx + 85, 62, t, 13, '#475569', bold=800)); o.append(label(gx + 85, 79, sub, 12, '#94a3b8'))
+        tot = 0
+        for i, b in enumerate(bits):
+            on = b != '-'; tot += vals[i] if on else 0
+            o.append(cell(gx + i * 58, 90, 52, 56, b if on else '–', ON if on else OFF, 24))
+            o.append(label(gx + i * 58 + 26, 166, str(vals[i]), 13, '#94a3b8', mono=True))
+        parts = [str(vals[i]) if bits[i] != '-' else '0' for i in range(3)]
+        o.append(label(gx + 85, 196, ' + '.join(parts) + ' = ', 14, '#64748b', mono=True, anchor='end')); o.append(label(gx + 93, 197, str(tot), 22, '#17504a', anchor='start', mono=True, bold=800))
+    o.append('<path d="M24 222 H736" stroke="#e5ebf3" stroke-width="1.6"/>')
+    o.append(label(24, 256, 'Octaal:', 14, '#64748b', anchor='start', bold=700)); o.append(label(100, 258, '7 6 4', 26, '#17504a', anchor='start', mono=True, bold=800))
+    c, cw = chip(250, 238, 'chmod 764 bestand'); o.append(c)
+    o.append(label(250 + cw + 14, 256, 'r = 4 · w = 2 · x = 1: tel op wat aan staat', 13.5, '#64748b', anchor='start'))
+    write('10-rechten', 'rechten-lezen.svg', svg(W, H, ''.join(o)))
+
+def umask_fig():
+    W = 760; o = []
+    cols = ['EIGENAAR', 'GROEP', 'ANDEREN']; cx = [210, 330, 450]; cwid = 100
+    def block(y, title, mx, um, res, rwx, octal, note):
+        out = [head(24, y + 4, title)]
+        for i, c in enumerate(cols): out.append(label(cx[i] + cwid / 2, y + 28, c, 12, '#94a3b8', bold=800))
+        rows = [('maximum', mx, OFF, '#475569'), ('umask: weghalen', um, SPEC, '#6b4a06'), ('resultaat', res, ON, '#17504a')]
+        for r, (name, vals, sty, col) in enumerate(rows):
+            yy = y + 40 + r * 46
+            out.append(label(24, yy + 28, name, 14, col, anchor='start', bold=700))
+            for i in range(3): out.append(cell(cx[i], yy, cwid, 38, vals[i], sty, 20))
+        out.append(label(590, y + 40 + 2 * 46 + 26, rwx, 20, '#17504a', anchor='start', mono=True, bold=800))
+        out.append(label(590, y + 40 + 2 * 46 + 46, octal, 12.5, '#94a3b8', anchor='start'))
+        out.append(label(590, y + 40 + 46 + 26, note, 12.5, '#94a3b8', anchor='start', ital=True))
+        return ''.join(out)
+    H = 540
+    o.append(card(W, H)); o.append(head(24, 30, 'UMASK: WAT KRIJG JE NIET?'))
+    c, cw = chip(250, 14, 'umask 027'); o.append(c)
+    o.append(label(24, 54, 'De umask bepaalt welke rechten je bij nieuwe bestanden en mappen niet krijgt.', 13.5, '#64748b', anchor='start'))
+    o.append(block(84, 'NIEUWE MAP', ['7', '7', '7'], ['0', '2', '7'], ['7', '5', '0'], 'rwxr-x---', '750', 'w (2) en alles (7) weg'))
+    o.append(block(288, 'NIEUW BESTAND', ['6', '6', '6'], ['0', '2', '7'], ['6', '4', '0'], 'rw-r-----', '640', 'een bestand krijgt nooit x'))
+    o.append('<path d="M24 478 H736" stroke="#e5ebf3" stroke-width="1.6"/>')
+    o.append(label(24, 506, 'Standaard voor student: umask 002 (bestand 664, map 775). Voor root: umask 022 (bestand 644, map 755).', 13.5, '#64748b', anchor='start'))
+    write('10-rechten', 'umask.svg', svg(W, H, ''.join(o)))
+
+def speciale_bits_fig():
+    W, H = 760, 330; o = [card(W, H), head(24, 30, 'SPECIALE BITS IN DE OCTALE MODUS')]
+    c, cw = chip(350, 14, 'chmod 3770 map'); o.append(c)
+    # vier cijfers
+    o.append(label(24, 88, 'Vier cijfers:', 14, '#64748b', anchor='start', bold=700))
+    o.append(label(150 + 91, 76, 'speciaal', 12, '#94a3b8', bold=800)); 
+    # speciaal-blok met drie bits
+    sp = [('4', 'setuid', False), ('2', 'setgid', True), ('1', 'sticky', True)]
+    for i, (v, nm, on) in enumerate(sp):
+        o.append(cell(150 + i * 64 - 2, 94, 58, 50, v, SPEC if on else OFF, 22)); o.append(label(150 + i * 64 + 27, 162, nm, 12.5, '#6b4a06' if on else '#94a3b8', bold=700))
+    o.append(label(150 + 3 * 64 + 6, 126, '=', 22, '#94a3b8', anchor='start', mono=True)); o.append(cell(150 + 3 * 64 + 30, 94, 58, 50, '3', SPEC, 26))
+    for i, (dgt, nm) in enumerate([('7', 'eigenaar'), ('7', 'groep'), ('0', 'anderen')]):
+        xx = 150 + 3 * 64 + 120 + i * 70
+        o.append(cell(xx, 94, 58, 50, dgt, ON if dgt != '0' else OFF, 26)); o.append(label(xx + 29, 162, nm, 12.5, '#475569', bold=700))
+    o.append(label(150 + 3 * 64 + 61, 76, 'som', 12, '#94a3b8', bold=800))
+    o.append('<path d="M24 190 H736" stroke="#e5ebf3" stroke-width="1.6"/>')
+    # ls-uitvoer
+    o.append(label(24, 228, 'ls -ld toont:', 14, '#64748b', anchor='start', bold=700))
+    ls = 'drwxrws--T'
+    o.append('<rect x="150" y="206" width="190" height="34" rx="9" fill="#0f172a"/>')
+    o.append('<text x="164" y="229" xml:space="preserve" font-family="%s" font-size="19" font-weight="700" fill="#e2e8f0">drwx<tspan fill="#fde68a">r</tspan><tspan fill="#fde68a">w</tspan><tspan fill="#fdba74">s</tspan>--<tspan fill="#fdba74">T</tspan></text>' % MONO)
+    o.append(label(360, 222, 's bij de groep: setgid staat aan, de x eronder ook', 13.5, '#6b4a06', anchor='start'))
+    o.append(label(360, 242, 'T bij anderen: sticky staat aan, maar de x eronder staat uit', 13.5, '#6b4a06', anchor='start'))
+    o.append('<path d="M24 262 H736" stroke="#e5ebf3" stroke-width="1.6"/>')
+    o.append(label(24, 292, 'Kleine letter (s, t): x staat ook aan.  Hoofdletter (S, T): x staat uit.', 13.5, '#64748b', anchor='start'))
+    o.append(label(24, 314, 'Alle speciale bits wissen: zet een extra nul voor de modus (chmod 00770).', 13.5, '#64748b', anchor='start'))
+    write('10-rechten', 'speciale-bits.svg', svg(W, H, ''.join(o)))
+
 # ------------------------------------------------------------------ grapjes
 def joke(name, ch, title, lines, caption, w=760, fs=15):
     h, body = term(lines, w=w, fs=fs, title=title)
@@ -303,4 +399,4 @@ def jokes():
         'Distro hoppen: leerzaam, tijdrovend en bijzonder verslavend.')
 
 if __name__ == '__main__':
-    ch2(); ch3(); prompt_fig(); ch4(); jokes()
+    ch2(); ch3(); prompt_fig(); ch4(); jokes(); rechten_lezen(); umask_fig(); speciale_bits_fig()

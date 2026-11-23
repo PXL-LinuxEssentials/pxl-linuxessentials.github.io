@@ -211,7 +211,7 @@ student@linux-ess:~$ grep -i -E 'usergroups' /etc/login.defs
 USERGROUPS_ENAB yes
 ```
 
-In `/etc/login.defs` staat geen `UMASK`-regel. Zonder waarde laat `pam_umask` de umask ongemoeid: die erf je dan van het proces dat je sessie start (bij een login is dat `022`). De regel `USERGROUPS_ENAB yes` zorgt ervoor dat `pam_umask` voor een gewone gebruiker met een eigen primaire groep (dezelfde naam als de gebruiker, zoals `student`) de groepsbits gelijk zet aan de eigenaarbits. Zo wordt `022` dus `002`, en dat verklaart waarom `student` bestanden maakt met `rw-rw-r--`. Root houdt `022`. Meer uitleg vind je in `man pam_umask`.
+De standaard umask is `022`. De regel `USERGROUPS_ENAB yes` zorgt ervoor dat `pam_umask` voor een gewone gebruiker met een eigen primaire groep (dezelfde naam als de gebruiker, zoals `student`) de groepsbits gelijk zet aan de eigenaarbits. Zo wordt `022` dus `002`, en dat verklaart waarom `student` bestanden maakt met `rw-rw-r--`. Root houdt `022`. Meer uitleg vind je in `man pam_umask`.
 
  Je kan de letternotatie ook gebruiken met umask:
 

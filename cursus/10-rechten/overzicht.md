@@ -70,7 +70,7 @@ De umask bepaalt welke rechten je **niet** krijgt bij nieuwe bestanden en mappen
 * **Rekenregel:** trek de umask af van 777 (map). Bij een bestand laat je de `x`-bits altijd weg.
 * `umask` toont de waarde · `umask 027` stelt in · `umask -S` toont in letters · `umask u=rwx,g=rx,o=` stelt in met letters.
 * **Enkel voor deze sessie.** Permanent: zet `umask 027` (of een andere waarde) in `~/.profile`.
-* **Systeembreed:** de PAM-module `pam_umask` stelt de umask in bij het inloggen (`grep -rn -i umask /etc/pam.d/`). De startwaarde `022` wordt geërfd van het proces dat je sessie start. Door `USERGROUPS_ENAB yes` in `/etc/login.defs` krijgt een gewone gebruiker met een eigen primaire groep daarna `002` (groepsbits = eigenaarbits). Root en `sudo` houden `022`. In Ubuntu 24.04 en ouder stond in `login.defs` ook `UMASK 022`, in 26.04 is die regel weg.
+* **Systeembreed:** de PAM-module `pam_umask` stelt de umask in bij het inloggen (`grep -rn -i umask /etc/pam.d/`). De startwaarde `022` wordt geërfd van het proces dat je sessie start. Door `USERGROUPS_ENAB yes` in `/etc/login.defs` krijgt een gewone gebruiker met een eigen primaire groep daarna `002` (groepsbits = eigenaarbits). Root en `sudo` houden `022`.
 
 | Umask | Bestand | Map | Gebruik |
 |---|---|---|---|

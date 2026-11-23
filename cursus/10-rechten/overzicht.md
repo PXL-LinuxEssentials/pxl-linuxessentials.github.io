@@ -24,6 +24,8 @@ Hoofdstuk 10 in één blik: wie mag wat met een bestand of map, hoe wijzig je da
 | `b` | blokapparaat (schijf of partitie, gegevens in blokken) | `/dev/sda` |
 | `c` | karakterapparaat (gegevens teken per teken, zoals een terminal) | `/dev/tty` |
 
+Je kan ook `p` (pipe) en `s` (socket) tegenkomen. Daar gaan we in deze cursus niet verder op in.
+
 | Recht | Op een bestand | Op een map | Octaal |
 |---|---|---|---|
 | `r` read | inhoud lezen | inhoud tonen (`ls`) | 4 |

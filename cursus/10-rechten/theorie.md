@@ -57,6 +57,7 @@ lrwxrwxrwx 1 root root 7 Apr 22  2026 /bin -> usr/bin
 * **`b` (blokapparaat):** een schijf of partitie, zoals `/dev/sda`. Het systeem leest en schrijft er in blokken. Apparaatbestanden staan in `/dev`.
 * **`c` (karakterapparaat):** hardware die een stroom van tekens verwerkt, zoals een terminal (`/dev/tty`).
 * Bij een apparaatbestand staan er in plaats van de grootte twee nummers (`8, 0`). Die identificeren het apparaat voor de kernel.
+* Je kan ook `p` (pipe) en `s` (socket) tegenkomen. Daar gaan we in deze cursus niet verder op in.
 
 **Mappen** hebben dezelfde rechten, maar ze betekenen iets anders:
 

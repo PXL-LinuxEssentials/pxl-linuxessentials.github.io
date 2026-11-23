@@ -104,16 +104,23 @@ Zo reken je: **r = 4, w = 2, x = 1**. Tel op wat aan staat:
 
 ![Rechten lezen en octaal berekenen](./assets/rechten-lezen.svg)
 
-| Binair | Octaal | Toegangsrechten (rwx) | Korte beschrijving                                                                                |
-| ------ | ----- | ---------------------- | ------------------------------------------------------------------------------------------------- |
-| 000    | 0     | ---                    | Geen rechten: kan niet lezen, schrijven of uitvoeren.                                             |
-| 001    | 1     | --x                    | Alleen uitvoeren: kan als programma worden uitgevoerd. (heeft ook r nodig om te draaien)          |
-| 010    | 2     | -w-                    | Alleen schrijven: kan worden gewijzigd, maar niet gelezen.                                        |
-| 011    | 3     | -wx                    | Schrijven en uitvoeren: wijzigen en als programma uitvoeren. (heeft ook r nodig om uit te voeren) |
-| 100    | 4     | r--                    | Alleen lezen: kan worden bekeken, maar niet gewijzigd of uitgevoerd.                              |
-| 101    | 5     | r-x                    | Lezen en uitvoeren: bekijken en als programma uitvoeren.                                          |
-| 110    | 6     | rw-                    | Lezen en schrijven: bekijken en wijzigen.                                                         |
-| 111    | 7     | rwx                    | Volledige rechten: bekijken, wijzigen en uitvoeren.                                               |
+Wat elk cijfer betekent, hangt af van of het om een **bestand** of een **map** gaat:
+
+| Octaal | Binair | `rwx` | Op een bestand | Op een map |
+|---|---|---|---|---|
+| **0** | 000 | `---` | niets | geen toegang |
+| **1** | 001 | `--x` | uitvoeren (een script heeft ook `r` nodig) | binnengaan (`cd`) en bestanden bereiken waarvan je de naam kent, maar de inhoud niet tonen |
+| **2** | 010 | `-w-` | wijzigen, maar niet lezen | zonder `x` in de praktijk nutteloos: je kan niets aanpassen |
+| **3** | 011 | `-wx` | wijzigen en uitvoeren (een script heeft ook `r` nodig) | binnengaan en bestanden maken, hernoemen en verwijderen, maar de inhoud niet tonen |
+| **4** | 100 | `r--` | lezen | de namen tonen (`ls`), maar er niet in gaan |
+| **5** | 101 | `r-x` | lezen en uitvoeren | de inhoud tonen en binnengaan (alleen lezen) |
+| **6** | 110 | `rw-` | lezen en wijzigen | zonder `x` in de praktijk onbruikbaar: je kan er niet in |
+| **7** | 111 | `rwx` | lezen, wijzigen en uitvoeren | alles: tonen, binnengaan, maken, hernoemen en verwijderen |
+
+Veelgebruikte combinaties:
+
+* **Bestanden:** `644` (iedereen leest, enkel de eigenaar wijzigt), `600` (privé) en `755` (programma of script dat iedereen mag uitvoeren).
+* **Mappen:** `755` (iedereen mag erin kijken, enkel de eigenaar wijzigt) en `700` (privé).
 
 
 ## Rechten wijzigen (chmod)

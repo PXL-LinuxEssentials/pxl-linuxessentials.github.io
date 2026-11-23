@@ -34,7 +34,34 @@ drwxrwxr-x 2 student student 4096 okt  2 19:36 folder
 -rw-rw-r-- 1 student student    0 okt  2 19:36 test.txt
 ```
 
-Het **eerste teken** is het type: `-` voor een gewoon bestand en `d` voor een map. Er bestaan ook `l` (symbolische link), `b` (blokapparaat), `c` (karakterapparaat), `p` (pipe) en `s` (socket).
+Het **eerste teken** is het type van het bestand:
+
+| Teken | Type | Uitleg | Voorbeeld |
+|---|---|---|---|
+| `-` | gewoon bestand | tekst, een programma, een afbeelding, ... | `/etc/passwd` |
+| `d` | map (directory) | bevat andere bestanden en mappen | `/home` |
+| `l` | symbolische link | verwijst naar een ander bestand of een andere map | `/bin` |
+| `b` | blokapparaat | hardware die gegevens in blokken verwerkt, zoals een schijf | `/dev/sda` |
+| `c` | karakterapparaat | hardware die gegevens teken per teken verwerkt, zoals een terminal | `/dev/tty` |
+| `p` | pipe | een doorgang waarlangs processen gegevens aan elkaar doorgeven | gemaakt met `mkfifo` |
+| `s` | socket | een verbinding tussen processen | `/run/dbus/system_bus_socket` |
+
+```bash
+student@linux-ess:~$ ls -l /dev/sda
+brw-rw---- 1 root disk 8, 0 Sep 24 13:10 /dev/sda
+student@linux-ess:~$ ls -l /dev/tty
+crw-rw-rw- 1 root tty 5, 0 Nov 23 21:36 /dev/tty
+student@linux-ess:~$ ls -ld /bin
+lrwxrwxrwx 1 root root 7 Apr 22  2026 /bin -> usr/bin
+student@linux-ess:~$ mkfifo mypipe
+student@linux-ess:~$ ls -l mypipe
+prw-rw-r-- 1 student student 0 Nov 23 21:40 mypipe
+student@linux-ess:~$ ls -l /run/dbus/system_bus_socket
+srw-rw-rw- 1 root root 0 Nov 23 21:36 /run/dbus/system_bus_socket
+```
+
+* Bij een **link** zie je achter de naam waar hij naartoe wijst (`/bin -> usr/bin`).
+* Bij een **apparaatbestand** staan er in plaats van de bestandsgrootte twee nummers (`8, 0`). Die identificeren het apparaat voor de kernel.
 
 **Mappen** hebben dezelfde rechten, maar ze betekenen iets anders:
 

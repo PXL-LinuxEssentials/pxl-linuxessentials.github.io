@@ -270,7 +270,7 @@ Als je de umask instelt met het commando, geldt dit alleen voor de huidige termi
 :::
 
 ::: warning Zet je umask terug
-Na deze voorbeelden staat de umask van je sessie nog op `077`. Alles wat je daarna maakt, krijgt dan strenge rechten, en dat geeft later `Permission denied` (bijvoorbeeld bij `/shares/ict`). Zet hem terug met `umask 002`, of open een nieuwe sessie.
+Na deze voorbeelden staat de umask van je sessie nog op `077`. Alles wat je daarna maakt, krijgt dan strenge rechten. Zet hem terug met `umask 002`, of open een nieuwe sessie.
 :::
 
 Let op: bestanden die root maakt, hebben andere rechten dan die van `student`.

@@ -40,11 +40,9 @@ Het **eerste teken** is het type van het bestand:
 |---|---|---|---|
 | `-` | gewoon bestand | tekst, een programma, een afbeelding, ... | `/etc/passwd` |
 | `d` | map (directory) | bevat andere bestanden en mappen | `/home` |
-| `l` | symbolische link | verwijst naar een ander bestand of een andere map | `/bin` |
-| `b` | blokapparaat | hardware die gegevens in blokken verwerkt, zoals een schijf | `/dev/sda` |
-| `c` | karakterapparaat | hardware die gegevens teken per teken verwerkt, zoals een terminal | `/dev/tty` |
-| `p` | pipe | een doorgang waarlangs processen gegevens aan elkaar doorgeven | gemaakt met `mkfifo` |
-| `s` | socket | een verbinding tussen processen | `/run/dbus/system_bus_socket` |
+| `l` | symbolische link | verwijst naar een ander bestand of een andere map, zoals een snelkoppeling | `/bin` |
+| `b` | blokapparaat | hardware waarvan de gegevens in blokken worden gelezen en geschreven, zoals een schijf | `/dev/sda` |
+| `c` | karakterapparaat | hardware waarvan de gegevens teken per teken worden verwerkt, zoals een terminal | `/dev/tty` |
 
 ```bash
 student@linux-ess:~$ ls -l /dev/sda
@@ -53,15 +51,12 @@ student@linux-ess:~$ ls -l /dev/tty
 crw-rw-rw- 1 root tty 5, 0 Nov 23 21:36 /dev/tty
 student@linux-ess:~$ ls -ld /bin
 lrwxrwxrwx 1 root root 7 Apr 22  2026 /bin -> usr/bin
-student@linux-ess:~$ mkfifo mypipe
-student@linux-ess:~$ ls -l mypipe
-prw-rw-r-- 1 student student 0 Nov 23 21:40 mypipe
-student@linux-ess:~$ ls -l /run/dbus/system_bus_socket
-srw-rw-rw- 1 root root 0 Nov 23 21:36 /run/dbus/system_bus_socket
 ```
 
-* Bij een **link** zie je achter de naam waar hij naartoe wijst (`/bin -> usr/bin`).
-* Bij een **apparaatbestand** staan er in plaats van de bestandsgrootte twee nummers (`8, 0`). Die identificeren het apparaat voor de kernel.
+* **`l` (link):** achter de naam zie je waar de link naartoe wijst. `/bin` is een link naar `usr/bin`: wie `/bin` opent, komt dus in `/usr/bin` terecht.
+* **`b` (blokapparaat):** een schijf of partitie, zoals `/dev/sda`. Het systeem leest en schrijft er in blokken. Apparaatbestanden staan in `/dev`.
+* **`c` (karakterapparaat):** hardware die een stroom van tekens verwerkt, zoals een terminal (`/dev/tty`).
+* Bij een apparaatbestand staan er in plaats van de grootte twee nummers (`8, 0`). Die identificeren het apparaat voor de kernel.
 
 **Mappen** hebben dezelfde rechten, maar ze betekenen iets anders:
 

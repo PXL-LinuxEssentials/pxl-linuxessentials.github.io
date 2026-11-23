@@ -13,8 +13,16 @@ Hoofdstuk 10 in één blik: wie mag wat met een bestand of map, hoe wijzig je da
  │    │     │     └ others: lezen
  │    │     └ groep: lezen en schrijven
  │    └ eigenaar: lezen, schrijven, uitvoeren
- └ type: - bestand · d map · l link · b/c apparaat · p pipe · s socket
+ └ type: - bestand · d map · l link · b blokapparaat · c karakterapparaat
 ```
+
+| Teken | Type | Voorbeeld |
+|---|---|---|
+| `-` | gewoon bestand | `/etc/passwd` |
+| `d` | map | `/home` |
+| `l` | symbolische link (verwijzing naar een ander bestand of een andere map) | `/bin -> usr/bin` |
+| `b` | blokapparaat (schijf of partitie, gegevens in blokken) | `/dev/sda` |
+| `c` | karakterapparaat (gegevens teken per teken, zoals een terminal) | `/dev/tty` |
 
 | Recht | Op een bestand | Op een map | Octaal |
 |---|---|---|---|

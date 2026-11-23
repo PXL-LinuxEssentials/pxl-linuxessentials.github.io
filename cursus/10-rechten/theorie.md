@@ -204,13 +204,10 @@ student@linux-ess:~/course$ ls -l
 Dit verschil heeft twee oorzaken:
 
 * **Bestanden die je met `sudo` maakt:** `sudo` gebruikt zelf een standaard umask van `022`. Daardoor krijgen ze geen schrijfrechten voor groep en anderen (`644`), ook al is jouw umask `002`.
-* **Je eigen umask (`002`):** die wordt bij het inloggen ingesteld door de PAM-module `pam_umask`, samen met een instelling in `/etc/login.defs`. Je ziet beide hier:
+* **Je eigen umask (`002`):** die wordt bij het inloggen ingesteld door de PAM-module `pam_umask`, in combinatie met een instelling in `/etc/login.defs`:
 
 ```bash
-student@linux-ess:~$ grep -rn -i umask /etc/pam.d/
-/etc/pam.d/common-session:26:session optional                   pam_umask.so
-/etc/pam.d/common-session-noninteractive:27:session optional                    pam_umask.so
-student@linux-ess:~$ grep -i -E 'umask|usergroups' /etc/login.defs
+student@linux-ess:~$ grep -i -E 'usergroups' /etc/login.defs
 USERGROUPS_ENAB yes
 ```
 

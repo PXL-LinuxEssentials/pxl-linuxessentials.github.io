@@ -572,7 +572,20 @@ student@linux-ess:/shares$ ls -ld ict3/
 drwxrwxr-x 2 root ict 4096 nov 27 15:20 ict3/
 ``` 
 
-De sticky bit zorgt er al voor dat leden van `ict` elkaars bestanden niet kunnen **verwijderen**. Het **overschrijven** van een bestand van iemand anders is een apart geval. Dat regelt de kernelparameter `fs.protected_regular`. Op Ubuntu staat die standaard op `2`: in een sticky map waar de groep mag schrijven, kan je dan een bestand van een ander niet openen met `>` (aanmaken of overschrijven), ook al heeft de groep `rw`. Wil je dat samenwerken aan elkaars bestanden wel toelaten, zet de parameter dan op `1`.
+Een sticky map doet twee dingen, en ze zijn niet hetzelfde:
+
+1. **Verwijderen en hernoemen:** alleen de eigenaar van het bestand (of van de map, of root) mag dat. Dit is de sticky bit zelf.
+2. **Overschrijven met `>`:** hiervoor bestaat de kernelparameter `fs.protected_regular`. Hij werkt **alleen in mappen met de sticky bit**.
+
+Wat `fs.protected_regular` doet in een sticky map, voor een bestand van iemand anders:
+
+| Waarde | Gedrag |
+|---|---|
+| `0` | Geen extra bescherming: de gewone rechten beslissen. |
+| `1` | Alleen in een sticky map waar **iedereen** mag schrijven (`o+w`, zoals `/tmp`) wordt `>` geblokkeerd. |
+| `2` | Ook in een sticky map waar de **groep** mag schrijven (zoals `/shares/ict`) wordt `>` geblokkeerd. Dit is de standaard op Ubuntu. |
+
+Met `2` kan Liam het bestand van Jacob dus niet overschrijven met `>`, ook al heeft de groep `rw`. Wil je dat samenwerken aan elkaars bestanden wel toelaten, zet de parameter dan op `1`. Verwijderen blijft dan nog steeds geblokkeerd door de sticky bit. Zonder sticky bit op de map speelt `fs.protected_regular` geen rol: dan beslissen alleen de rechten `rw` van de groep, en kan Liam het bestand overschrijven, maar ook verwijderen.
 
 We vertrekken van de gedeelde map met setgid en sticky bit (`drwxrwsr-t`, dus `3775`). Jacob maakt een bestand aan waar de groep `ict` `rw` op heeft:
 

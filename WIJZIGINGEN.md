@@ -108,3 +108,6 @@ De oorspronkelijke vragen over nginx, `scp`, `tar`, `wget`, `Ctrl+F5` hoorden ni
 - Nummers (menu, kaarten, oefeningen, kennistoets) en labels in één neutrale tint.
 - Geen schaduwen meer, meer witruimte, tekstkolom max. ±74 tekens, lichtere lettergewichten, geen animaties.
 - Gele labels in de figuren zachter.
+
+## Overzichten hoofdstuk 10 en 11 (23 nov 2026)
+- Nieuw: `cursus/10-rechten/overzicht.md` en `cursus/11-automatisatie/overzicht.md`, in dezelfde opbouw als hoofdstuk 1 tot 9 (tabellen, valkuilen, zelftest).

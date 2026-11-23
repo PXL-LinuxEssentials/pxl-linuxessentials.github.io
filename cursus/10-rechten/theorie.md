@@ -594,6 +594,8 @@ liam@linux-ess:/shares/ict$ echo text from liam > testfile2     # de groep heeft
 liam@linux-ess:/shares/ict$ exit
 student@linux-ess:~$ sudo sysctl fs.protected_regular     # huidige waarde tonen
 fs.protected_regular = 2
+student@linux-ess:~$ cat /proc/sys/fs/protected_regular   # dezelfde waarde, rechtstreeks uit /proc
+2
 student@linux-ess:~$ sudo sysctl fs.protected_regular=1   # parameter op 1 zetten
 fs.protected_regular = 1
 student@linux-ess:~$ su - liam

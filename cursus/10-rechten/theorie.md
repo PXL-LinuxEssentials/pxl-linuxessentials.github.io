@@ -431,11 +431,13 @@ drwxrwsr-x 3 root ict 4096 Nov 26 16:12 /shares/ict/
 
 In de rechten van de groep staat nu een **`s`**. Een kleine `s` betekent dat de `x` ook aan staat. Een hoofdletter `S` betekent dat de `x` uit staat.
 
-::: warning Een 4-cijferige modus vervangt alle speciale bits
-`chmod 2775` zet de speciale bits op **precies** `2` (setgid). Een sticky bit die al aanstond, verdwijnt dus: `drwxrwsr-t` (`3775`) wordt na `chmod 2775` `drwxrwsr-x`. Het eerste cijfer is geen "voeg toe", maar de nieuwe waarde van alle speciale bits samen.
+::: warning Een numerieke modus haalt de sticky bit weg
+Bij een numerieke modus op een **map** geldt:
 
-* Wil je een bit toevoegen of weghalen en de rest laten staan? Gebruik de symbolische vorm: `chmod g+s`, `chmod o+t`, `chmod o-t`.
-* Wil je alle speciale bits wissen? Gebruik `chmod 00775` (extra nul).
+* De **sticky bit** wordt vervangen door het cijfer dat je opgeeft. `chmod 2775` of `chmod 0777` op `drwxrwsr-t` geeft dus een map zonder `t`.
+* **setuid en setgid blijven staan.** Ze gaan er alleen af met een extra nul (`chmod 00775`, vijf cijfers) of symbolisch (`chmod g-s`).
+
+Wil je maar één bit aanpassen en de rest laten staan, gebruik dan de symbolische vorm: `chmod g+s`, `chmod o+t`, `chmod o-t`.
 :::
 
 Met setgid krijgen nieuwe bestanden en mappen in deze map **dezelfde groepseigenaar als de map zelf**, niet de primaire groep van de maker:

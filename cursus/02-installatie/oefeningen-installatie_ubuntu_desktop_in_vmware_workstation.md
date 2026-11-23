@@ -111,7 +111,7 @@ We kiezen ervoor om geen versleuteling (encryption) te gebruiken:
 
 ![Ubuntu Desktop Versleuteling](./assets/encrypt.png)
 
-We specifiëren de gebruikersnaam, wachtwoord en de computernaam. Gebruik als gebruikersnaam **student**, als wachtwoord **ubdesk** en als computernaam een naam naar keuze:
+We specificeren de gebruikersnaam, wachtwoord en de computernaam. Gebruik als gebruikersnaam **student**, als wachtwoord **ubdesk** en als computernaam een naam naar keuze:
 
 ![Ubuntu Desktop Account aanmaken](./assets/name.png)
 

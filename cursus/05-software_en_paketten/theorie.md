@@ -71,6 +71,10 @@ Reading state information... Done
 8 packages can be upgraded. Run 'apt list --upgradable' to see them.
 ```
 
+::: info Ubuntu-versie in de voorbeelden
+De uitvoer in dit hoofdstuk komt van Ubuntu 24.04 (codenaam `noble`). Op Ubuntu 26.04 heet de codenaam `resolute` en verschillen de pakketnamen en versienummers. De werking van de commando's is hetzelfde.
+:::
+
 ::: info sudo vereist voor apt
 `apt` brengt systeembrede aanpassingen aan (software installeren/verwijderen/bijwerken) en vereist daarom `sudo`-rechten.
 :::

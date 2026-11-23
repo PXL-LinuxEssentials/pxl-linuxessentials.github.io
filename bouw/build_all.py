@@ -42,7 +42,7 @@ PDF_TITLES = {
     '08-Filters-Spiekbrief.pdf': 'Filters',
     '09-Gebruikers-en-groepen-Spiekbrief.pdf': 'Gebruikers en groepen',
 }
-ICO = {'start': '🏁', 'theorie': '📘', 'oefeningen': '🛠', 'kennistoets': '🧠', 'overzicht': '📄', 'extra': '➕'}
+ICO = {'start': '', 'theorie': '', 'oefeningen': '', 'kennistoets': '', 'overzicht': '', 'extra': ''}
 NAMES = {'start': 'Start', 'theorie': 'Theorie', 'oefeningen': 'Oefeningen', 'kennistoets': 'Kennistoets', 'overzicht': 'Overzicht'}
 
 PDF_DATA = {}   # bestandsnaam -> dict(b64, pages, text, thumb)
@@ -186,7 +186,7 @@ def render_code(lang, body, in_details):
         cls = 'term script' if script else 'term'
         if script: title = 'Commando'
         return '<div class="%s"><div class="bar"><i></i><i></i><i></i><span>%s</span>%s</div><pre>%s</pre></div>' % (cls, esc(title), copy_btn(cp), ''.join(rows))
-    return '<div class="filebox"><div class="bar"><span>📄 Tekst / bestandsinhoud</span>%s</div><pre>%s</pre></div>' % (copy_btn(body), esc(body))
+    return '<div class="filebox"><div class="bar"><span>Tekst / bestandsinhoud</span>%s</div><pre>%s</pre></div>' % (copy_btn(body), esc(body))
 
 # ---------------------------------------------------------------- componenten
 def attrs(tag):
@@ -495,7 +495,7 @@ def main():
     for m in meta:
         for k in m['pages']:
             lab = NAMES.get(k) or m['extras'].get(k)
-            labels[(m['num'], k)] = (ICO.get(k, ICO['extra']) + ' ' + lab)
+            labels[(m['num'], k)] = (ICO.get(k, ICO['extra']) + ' ' + lab).strip()
             flat.append((m['num'], k))
     def nb(m, k):
         i = flat.index((m, k))
@@ -526,7 +526,7 @@ def main():
                 body = [b.replace('<ol>', '<ol class="questions">', 1) if 'kernvragen' in b[:120] else b for b in body]
                 # tegels
                 tiles = ''
-                tl = [('theorie', '📘', 'Theorie', 'Leer de commando\'s en concepten', 't1'), ('oefeningen', '🛠', 'Oefeningen', 'Oefen in je Ubuntu-VM', 't2'), ('kennistoets', '🧠', 'Kennistoets', 'Test wat je kent', 't3'), ('overzicht', '📄', 'Overzicht', 'Het hoofdstuk op één pagina', 't4')]
+                tl = [('theorie', '', 'Theorie', 'Leer de commando\'s en concepten', 't1'), ('oefeningen', '', 'Oefeningen', 'Oefen in je Ubuntu-VM', 't2'), ('kennistoets', '', 'Kennistoets', 'Test wat je kent', 't3'), ('overzicht', '', 'Overzicht', 'Het hoofdstuk op één pagina', 't4')]
                 tiles = '<div class="tiles">' + ''.join('<a class="tile %s" href="#%s/%s"><span>%s</span><b>%s</b><small>%s</small></a>' % (c, num, kk, ic, t, s) for kk, ic, t, s, c in tl if kk in mt['pages']) + '</div>'
                 chips = ''
                 if info['week']: chips += '<span class="chip">📅 Week %s</span>' % info['week']
@@ -568,14 +568,14 @@ def main():
         if info['week']: pills += '<span class="pill">Week %s</span>' % info['week']
         if info['uur']: pills += '<span class="pill">± %s u</span>' % info['uur']
         if info['nex']: pills += '<span class="pill">%d oef.</span>' % info['nex']
-        if 'overzicht' in mt['pages']: pills += '<span class="pill pk">📄 overzicht</span>'
+        if 'overzicht' in mt['pages']: pills += '<span class="pill pk">overzicht</span>'
         first = mt['pages'][0]
         chap_cards += ('<a class="chcard c%d" href="#%s/%s" data-chap="%s"><span class="cn">%s</span>%s<div class="cb"><b>%s</b><small>%s</small><div class="pills">%s</div>'
                        '<div class="cprog" hidden><div class="meter"><i></i></div><span></span></div></div></a>') % ((int(ch['num']) - 1) % 6, ch['num'], first, ch['num'], ch['num'], art.card_art(ch['num']), esc(ch['title']), esc(ch['blurb']), pills)
     pdf_rows = ''.join('<a class="pdfrow" href="#%s/overzicht"><span class="pn">%s</span><span>%s</span><span class="go">Openen →</span></a>' % (ch['num'], ch['num'], esc(ch['title'])) for ch, mt, info in cards if 'overzicht' in mt['pages'])
     home = ('<main class="page" id="p-home" data-pid="home"><div class="wrap"><section class="hero big"><div class="kicker">PXL · Toegepaste Informatica</div><h1>Linux Essentials</h1>'
             '<p>De volledige cursus in één bestand: theorie, oefeningen, kennistoetsen en overzichten. Alles werkt offline.</p>'
-            '<div class="chips"><span class="chip">12 hoofdstukken</span><span class="chip">🛠 oefeningen met oplossingen achteraf</span><span class="chip">📄 overzichtjes</span><span class="chip">🔍 zoeken</span></div>'
+            '<div class="chips"><span class="chip">12 hoofdstukken</span><span class="chip">oefeningen met oplossingen achteraf</span><span class="chip">overzichtjes</span><span class="chip">zoeken</span></div>'
             '<div class="herocta"><a class="btn big" id="resume" href="#01/start" hidden>Verder waar je gebleven was →</a><a class="btn big ghostw" href="#01/start">Begin bij hoofdstuk 1</a></div></section>'
             '<div class="overall"><b id="overall-label">Voortgang</b><div class="meter"><i id="overall-meter"></i></div><button class="btn ghost" id="resetall" type="button">Alles wissen</button></div>'
             '<h2 class="hh">Hoofdstukken</h2><div class="chgrid">%s</div>'
@@ -602,7 +602,7 @@ def main():
 <button class="iconbtn" id="theme" type="button" title="Donker / licht thema">🌙</button></div>
 <div class="progressbar"><i></i></div>
 <div class="chpanel" id="chpanel" hidden style="display:none"><div class="in">{chap_options}</div></div></header>
-<aside class="side" id="side" aria-label="Hoofdstukken"><div class="sidehead"><a class="sh" href="#home">🏠 Overzicht cursus</a><div class="sidetools"><button type="button" id="sideopen">Alles open</button><button type="button" id="sideclose">Alles dicht</button></div></div>{''.join(side_html)}</aside><div class="sideback" id="sideback"></div>
+<aside class="side" id="side" aria-label="Hoofdstukken"><div class="sidehead"><a class="sh" href="#home">Overzicht cursus</a><div class="sidetools"><button type="button" id="sideopen">Alles open</button><button type="button" id="sideclose">Alles dicht</button></div></div>{''.join(side_html)}</aside><div class="sideback" id="sideback"></div>
 <div class="searchov" id="searchov" hidden><div class="box"><input id="searchin" type="search" placeholder="Zoek in theorie, oefeningen, kennistoetsen en overzichten…" autocomplete="off"><div id="searchres"></div><small>Esc om te sluiten</small></div></div>
 <div class="docentbar" id="docentbar" hidden>Docentenmodus: alle oplossingen zijn ontgrendeld.</div>
 <div class="toast" id="toast" hidden></div>

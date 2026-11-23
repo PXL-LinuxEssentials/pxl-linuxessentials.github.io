@@ -23,22 +23,22 @@ Om de inhoud van bestanden te bekijken, gebruiken we het commando `cat` (afkorti
 
 ```bash
 student@linux-ess:~$ cat /etc/os-release
-PRETTY_NAME="Ubuntu 24.04.3 LTS"
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
 NAME="Ubuntu"
-VERSION_ID="24.04"
-VERSION="24.04.3 LTS (Noble Numbat)"
-VERSION_CODENAME=noble
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
 ID=ubuntu
 ID_LIKE=debian
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-UBUNTU_CODENAME=noble
+UBUNTU_CODENAME=resolute
 LOGO=ubuntu-logo
 ```
 
-Hiermee wordt de volledige bestandsinhoud in de terminal afgedrukt. (Het versienummer op jouw VM kan lichtjes verschillen, bv. `24.04.2`. Dat is geen probleem.)
+Hiermee wordt de volledige bestandsinhoud in de terminal afgedrukt. (Het versienummer op jouw VM kan lichtjes verschillen, bv. `26.04.0`. Dat is geen probleem.)
 
 ::: warning cat overspoelt de terminal
 In een terminal zonder muis- of scrollbalkondersteuning (zoals de console van een server) kun je niet eenvoudig terugscrollen. Is het bestand groot, dan scrolt alles voorbij en zie je enkel de laatste 30 à 40 regels. Gebruik `less` om door grote bestanden te bladeren.
@@ -49,18 +49,18 @@ Het commando `tac` is `cat` achterstevoren geschreven. Dit is ook precies wat he
 ```bash
 student@linux-ess:~$ tac /etc/os-release
 LOGO=ubuntu-logo
-UBUNTU_CODENAME=noble
+UBUNTU_CODENAME=resolute
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 SUPPORT_URL="https://help.ubuntu.com/"
 HOME_URL="https://www.ubuntu.com/"
 ID_LIKE=debian
 ID=ubuntu
-VERSION_CODENAME=noble
-VERSION="24.04.3 LTS (Noble Numbat)"
-VERSION_ID="24.04"
+VERSION_CODENAME=resolute
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_ID="26.04"
 NAME="Ubuntu"
-PRETTY_NAME="Ubuntu 24.04.3 LTS"
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
 ```
 
 `cat` en `tac` kunnen meerdere bestanden als argumenten krijgen. De inhoud wordt dan achter elkaar (samengevoegd) getoond:

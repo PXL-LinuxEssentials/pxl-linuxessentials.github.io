@@ -237,7 +237,7 @@ drwxr-x--- 2 student student 4096 Nov 11 14:04 folder4
 
 
 ## Samenwerken in een team (setgid)
-Als we willen samenwerken, is het belangrijk dat bepaalde gebruikers elkaars bestanden in een geshared mapje kunnen wijzigen. De oplossing om deze gebruikers dezelfde primaire groep te geven, is een beveiligingsprobleem omdat dit ook de rechten op hun homefolders verandert:
+Als we willen samenwerken, is het belangrijk dat bepaalde gebruikers elkaars bestanden in een gedeeld mapje kunnen wijzigen. De oplossing om deze gebruikers dezelfde primaire groep te geven, is een beveiligingsprobleem omdat dit ook de rechten op hun homefolders verandert:
 
 ```bash
 student@linux-ess:~$ sudo groupadd it 

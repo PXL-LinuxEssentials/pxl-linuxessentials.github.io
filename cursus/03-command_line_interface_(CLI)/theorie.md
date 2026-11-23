@@ -50,6 +50,10 @@ student@linux-ess:~$ sudo shutdown now
 
 Met deze opdracht wordt de Ubuntu-servermachine afgesloten. Dit is ook de correcte manier om de virtuele machine af te sluiten! `sudo` staat voor *superuser do*. Voor sommige opdrachten zijn beheerdersrechten nodig. Zet je `sudo` vooraan, dan voert Linux het commando uit als de superuser, die in Linux **root** heet (te vergelijken met de administrator in Windows). In het voorbeeld voert `sudo` dus het commando `shutdown` uit, en `now` is het argument van `shutdown`: *nu afsluiten*.
 
+::: tip Wachtwoord bij sudo
+Op Ubuntu 26.04 zie je sterretjes (`*`) terwijl je je wachtwoord typt bij `sudo`. Op oudere versies en bij het inloggen verschijnt niets. In beide gevallen wordt je wachtwoord wel degelijk ingevoerd.
+:::
+
 Commando's hebben vaak **opties** (beginnend met een koppelteken `-`) en **argumenten** (gescheiden door spaties) om hun werking aan te passen. Het commando `shutdown` neemt een optionele tijdswaarde die bepaalt wanneer de server afsluit. Geef je geen waarde, dan wordt het afsluiten één minuut na het uitvoeren van het commando gepland. Laten we de andere opties bekijken met `man shutdown`:
 
 ```output

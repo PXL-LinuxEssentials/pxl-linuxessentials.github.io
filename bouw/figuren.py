@@ -228,7 +228,7 @@ def ch3():
          ('<tspan fill="%s" font-weight="700">student@ubserv</tspan>:<tspan fill="%s" font-weight="700">~</tspan>$ <tspan fill="#fde68a">▌</tspan>' % (Gr, B), G)]
     def tag(n, t, y):
         w = tw(t, 13) * 1.12 + 52; x = 836 - w
-        return '<g><rect x="%.1f" y="%d" width="%.1f" height="26" rx="13" fill="#f6c453"/><text x="%.1f" y="%d" font-family="%s" font-size="13" font-weight="800" fill="#3b2a05">%s  %s</text></g>' % (x, y, w, x + 14, y + 18, FONT, n, esc(t))
+        return '<g><rect x="%.1f" y="%d" width="%.1f" height="26" rx="13" fill="#efe0b4"/><text x="%.1f" y="%d" font-family="%s" font-size="13" font-weight="800" fill="#3b2a05">%s  %s</text></g>' % (x, y, w, x + 14, y + 18, FONT, n, esc(t))
     h, body = term(L)
     lh = 14.5 * 1.42
     ex = tag('1', 'gebruikersnaam', int(46 + 5 * lh - 30)) + tag('2', 'wachtwoord (je ziet niets verschijnen)', int(46 + 5 * lh - 1)) + tag('3', 'de prompt: je bent ingelogd', int(46 + 19 * lh - 22))

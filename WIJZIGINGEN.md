@@ -92,3 +92,19 @@ De oorspronkelijke vragen over nginx, `scp`, `tar`, `wget`, `Ctrl+F5` hoorden ni
 - Alle boomdiagrammen van hoofdstuk 4 (incl. oefeningen), het virtualisatieschema (ch02), de loginscreenshot (ch03) en het mappenoverzicht (ch04) zijn vervangen door zelfgemaakte SVG's in een rustige stijl. Voor/na-figuren tonen nu twee panelen met het gebruikte commando.
 - Grapjes vervangen door eigen terminal-grapjes: sudo-broodje (ch03), vim afsluiten (ch06), tar-opties (ch05), chmod 777 (ch10), distro hoppen (ch01).
 - Alle figuren worden gegenereerd door `bouw/figuren.py` (`python bouw/figuren.py`).
+
+## Update: kopiëren
+- Bij "Kopieer" worden meerdere commandoregels samengevoegd met `; ` zodat je ze in één keer kan plakken en uitvoeren. Commentaar achteraan een regel wordt weggelaten. Blokken met heredoc (`<< EOF`, `cat > bestand`), if/for/while-structuren, regelvoortzetting met `\` of aanhalingstekens + commentaar blijven gewone regels, omdat `;` daar de betekenis zou breken.
+
+- Prompt-schema (ch03) opnieuw getekend als terminal met kleurmarkeringen (`prompt.svg`).
+
+## Update: nalezing
+- Spelling: specificeren, van alles, gedeeld mapje, opraken.
+- Ubuntu 26.04 (Resolute Raccoon): versie-uitvoer in ch06 en Azure-image in ch02 aangepast; in ch05 een opmerking dat de apt-uitvoer van 24.04 komt; in ch03 een tip dat sudo nu sterretjes toont.
+
+## Rustigere opmaak (23 nov 2026)
+- Banners (start en paginatitels): effen en licht in plaats van kleurverloop; hero-illustratie weggelaten.
+- Emoji's uit tabs, zijmenu en labels gehaald.
+- Nummers (menu, kaarten, oefeningen, kennistoets) en labels in één neutrale tint.
+- Geen schaduwen meer, meer witruimte, tekstkolom max. ±74 tekens, lichtere lettergewichten, geen animaties.
+- Gele labels in de figuren zachter.

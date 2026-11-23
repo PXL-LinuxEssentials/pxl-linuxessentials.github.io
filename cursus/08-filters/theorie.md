@@ -969,7 +969,7 @@ pxe
 pxe boot
 ```
 
-We kunnen ook een grouping gebruiken om een herhaling te specifiëren van een bepaalde expressie. Zo zijn de twee onderstaande regular expressions hetzelfde:
+We kunnen ook een grouping gebruiken om een herhaling te specificeren van een bepaalde expressie. Zo zijn de twee onderstaande regular expressions hetzelfde:
 
 ```bash
 student@linux-ess:~$ grep -E "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" regexlist.txt

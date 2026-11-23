@@ -402,3 +402,64 @@ nav.tabs a.active{background:color-mix(in srgb,var(--tabc,var(--blue)) 15%,var(-
 .chcard .cardart{background:linear-gradient(120deg,#56808a,#5c7596 60%,#716f9a)}
 .tile.t4{background:linear-gradient(135deg,#9a7390,#b38d77)}
 [data-theme=dark] nav.tabs a.active{background:color-mix(in srgb,var(--tabc,var(--blue)) 22%,var(--surface))}
+/* ---- rust: lichtere banners, minder kleur, meer ruimte ---- */
+:root{--shadow:none;--bg:#f7f8fa;--text:#273244;--muted:#6b7686;--border:#e6eaf0}
+[data-theme=dark]{--shadow:none;--text:#d9e0ea;--bg:#0e1522}
+body{line-height:1.75;font-size:17px}
+.page.active{animation:none}
+html{scroll-behavior:auto}
+.wrap{padding-top:34px}
+/* banners: effen en licht in plaats van kleurverloop */
+.hero{background:var(--surface2)!important;color:var(--text);border:1px solid var(--border);padding:44px 40px}
+[data-theme=dark] .hero{background:var(--surface2)!important}
+.hero .kicker{color:var(--muted);opacity:1;font-weight:600}
+.hero h1{font-weight:700}
+.hero p{opacity:1;color:var(--muted)}
+.hero .chip{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-weight:600}
+.heroart{opacity:.55;filter:saturate(.5)}
+.pagetitle{background:transparent!important;color:var(--text);box-shadow:none;padding:6px 2px 18px;border-radius:0;border-bottom:1px solid var(--border);margin-bottom:26px;font-weight:700}
+.pagetitle small{color:var(--muted);opacity:1;font-weight:500}
+/* kaders: geen schaduw, ruimer */
+.sec,.ex,.q,.callout,.chcard,.overall,.progresscard,.scorecard,.setbar,.pdfcard,.filebox,figure img,.pager a{box-shadow:none}
+.sec{padding:10px 36px 28px;margin-bottom:30px;border-radius:14px}
+.sec>h2{font-size:24px;font-weight:700;margin:22px 0 16px}
+.sec h3{color:var(--text);border-bottom:none;font-size:19px;font-weight:650;margin:30px 0 10px}
+.sec>h2 .num{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.sec p,.sec li{max-width:74ch}
+li::marker{color:var(--muted);font-weight:500}
+p{margin-bottom:16px}
+li{margin:6px 0}
+/* tabellen en labels: zacht */
+th{background:var(--surface2);color:var(--text);border-bottom:1px solid var(--border)}
+.ex .tag{background:var(--surface2);color:var(--muted);border:1px solid var(--border);font-weight:650}
+.ex{padding:10px 32px 22px;margin-bottom:26px}
+.q{padding:18px 26px 20px}
+ol.questions li::before{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.callout{background:color-mix(in srgb,var(--c) 5%,var(--surface))}
+/* zijmenu: neutrale nummers, geen vette titels */
+.sch summary .n{background:var(--surface2)!important;color:var(--muted);border:1px solid var(--border);font-weight:700}
+.sch summary{font-weight:550}
+.sch a{font-weight:500}
+.sch.cur summary b{color:var(--text);font-weight:700}
+.sch a.active{background:var(--surface2);color:var(--text);font-weight:600}
+.sidehead .sh{font-weight:650}
+/* hoofdstukkaarten: neutraal nummer */
+.chcard .num,.chcard .cn,.chcard .badge{background:var(--surface2)!important;color:var(--muted)!important;border:1px solid var(--border)}
+/* logo en voortgang */
+.brand .logo{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.brand{font-weight:700}
+.progressbar i{background:var(--blue)}
+/* terminal: iets zachter */
+.term{box-shadow:none;border-color:#243044}
+.chcard:hover{transform:none;border-color:var(--muted)}
+.heroart{display:none}
+.hero:has(.heroart) h1,.hero:has(.heroart) p{max-width:none}
+.hero{padding:38px 40px}
+.hero .btn{background:var(--blue);color:#fff;border:1px solid var(--blue)}
+.hero .btn:hover{filter:brightness(1.08)}
+.sch summary b{font-weight:560}
+.sch.cur summary b{font-weight:700}
+.pill.pk{color:var(--muted)}
+.ex .badge{background:var(--surface2);color:var(--muted);border:1px solid var(--border);font-weight:700}
+.ex>header h2{font-weight:650}
+.q .qt .n,.q .n{background:var(--surface2)!important;color:var(--muted)!important;border:1px solid var(--border)}

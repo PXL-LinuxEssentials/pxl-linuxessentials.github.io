@@ -8,7 +8,7 @@ Om in Azure Cloud te kunnen werken moet je eerst een Visual Studio Pro Subscript
 
 De Procedure staat [hier](https://hogeschoolpxl.sharepoint.com/:w:/g/pxl-digital/IQAB4yrYj_CzS7zaj5xQQ34VAUTo40OkYaDrlYcz9j7j_bA) uitgelegd.
 
-Je krijgt dan maandelijks een tegoed van ongeveer €45 dat je kan spenderen in Azure Cloud. Zolang je binnen het budget blijft, ben je dus eigenlijk gratis resources aan het gebruiken. Let wel op dat je het tegoed niet opgebruikt door vanalles te exploreren dat ook in Azure zit, maar niet in de les behandeld wordt. Want soms kan het tegoed wel heel snel opgeraken op deze manier. Wanneer je tegoed op is, zal je moeten wachten tot de volgende periode begint (maandelijks op zelfde dag als de startdatum van je subscription)
+Je krijgt dan maandelijks een tegoed van ongeveer €45 dat je kan spenderen in Azure Cloud. Zolang je binnen het budget blijft, ben je dus eigenlijk gratis resources aan het gebruiken. Let wel op dat je het tegoed niet opgebruikt door van alles te exploreren dat ook in Azure zit, maar niet in de les behandeld wordt. Want soms kan het tegoed wel heel snel opraken op deze manier. Wanneer je tegoed op is, zal je moeten wachten tot de volgende periode begint (maandelijks op zelfde dag als de startdatum van je subscription)
 
 
 
@@ -90,7 +90,7 @@ Klik op Create onder Linux Virtual Machine
 - Virtual Machine name: Free_Linux
 - Resource Group wordt automatisch ingevuld
 - Region: West US 2 (in West Europe geen rechten om aan te maken)
-- Image: Ubuntu Server 24.04 LTS – x64 Gen2
+- Image: Ubuntu Server 26.04 LTS – x64 Gen2
 - Size: Standard_B2ats_v2 (of wat er voorgesteld wordt)
 - Username: student
 - SSH: Use Existing key stored in Azure
@@ -157,7 +157,7 @@ Klik op Create
 - Resource Group wordt automatisch ingevuld
 - Region: West Europe
 - Zone options: Azure-selected zone
-- Image: Ubuntu Server 24.04 LTS – x64 Gen2
+- Image: Ubuntu Server 26.04 LTS – x64 Gen2
 - Size: Standard_B2ts_v2 (als deze niet kan klik je op See all sizes en selecteer je een andere → zie laatste kolom voor prijs per maand!)
 - Username: student
 - SSH: Hergebruik je bestaande key: linuxess

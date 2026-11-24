@@ -431,15 +431,6 @@ drwxrwsr-x 3 root ict 4096 Nov 26 16:12 /shares/ict/
 
 In de rechten van de groep staat nu een **`s`**. Een kleine `s` betekent dat de `x` ook aan staat. Een hoofdletter `S` betekent dat de `x` uit staat.
 
-::: warning Een numerieke modus haalt de sticky bit weg
-Bij een numerieke modus op een **map** geldt:
-
-* De **sticky bit** wordt vervangen door het cijfer dat je opgeeft. `chmod 2775` of `chmod 0777` op `drwxrwsr-t` geeft dus een map zonder `t`.
-* **setuid en setgid blijven staan.** Ze gaan er alleen af met een extra nul (`chmod 00775`, vijf cijfers) of symbolisch (`chmod g-s`).
-
-Wil je maar één bit aanpassen en de rest laten staan, gebruik dan de symbolische vorm: `chmod g+s`, `chmod o+t`, `chmod o-t`.
-:::
-
 Met setgid krijgen nieuwe bestanden en mappen in deze map **dezelfde groepseigenaar als de map zelf**, niet de primaire groep van de maker:
 
 ```bash
@@ -557,8 +548,13 @@ student@linux-ess:/shares$ ls -ld ict3
 drwxrws--T 2 root ict 4096 nov 27 15:20 ict3 #zowel setgid en sticky bit staan aan, wanneer de x voor others niet aan staat, wordt er een hoofdletter T getoont
 ```
 
-::: tip Speciale bits verwijderen
-Om de sticky bit uit te zetten gebruik je een nul. Een driecijferige modus verwijdert ook de sticky bit, maar de setgid bit blijft behouden. Om **alle** speciale machtigingen te verwijderen, voeg je een extra nul toe aan de voorkant (`00xxx`).
+::: warning Een numerieke modus haalt de sticky bit weg
+Bij een numerieke modus op een **map** geldt:
+
+* De **sticky bit** wordt vervangen door het cijfer dat je opgeeft. `chmod 2775` of `chmod 0777` op `drwxrwsr-t` geeft dus een map zonder `t`.
+* **setuid en setgid blijven staan.** Ze gaan er alleen af met een extra nul (`chmod 00775`, vijf cijfers) of symbolisch (`chmod g-s`).
+
+Wil je maar één bit aanpassen en de rest laten staan, gebruik dan de symbolische vorm: `chmod g+s`, `chmod o+t`, `chmod o-t`.
 :::
 
 ```bash

@@ -94,8 +94,8 @@ Vergeet je `-a` bij `usermod -G`, dan vervangt dit alle extra groepen. Was de ge
 
 | Manier | Opmerking |
 |---|---|
-| `sudo usermod -r -G it x` | enkel vanaf Ubuntu 24.04 LTS |
-| `sudo deluser x it` | enkel in Debian-based distro's |
+| `sudo usermod -r -G it x` | `-r` = *remove*: haalt x uit de groep it |
+| `sudo deluser x it` | enkel op Debian-gebaseerde distributies (zoals Ubuntu) |
 | `sudo usermod -G g1,g2 x` | zonder `-a`: geef alle extra groepen op die moeten blijven (gescheiden door komma, zonder spaties). Wat je weglaat, verdwijnt. Bv. x zit in sudo, it en ict en moet uit it: `-G sudo,ict` |
 | `/etc/group` bewerken | verwijder de naam uit de ledenlijst van de groep |
 

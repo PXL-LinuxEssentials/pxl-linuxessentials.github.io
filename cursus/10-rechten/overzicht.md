@@ -97,9 +97,17 @@ Nieuwe bestanden zijn standaard leesbaar voor alle gebruikers. Pas de rechten aa
 Het scenario: Liam en Jacob moeten samen bestanden in `/shares/ict` kunnen bewerken.
 
 **Stappen**
+
 1. Geef elke gebruiker een **eigen primaire groep** (`usermod -g liam liam`). Een gedeelde primaire groep opent ook elkaars homefolders.
 2. Maak een groep voor de samenwerking (`groupadd ict`) en voeg beide gebruikers toe met `usermod -aG ict liam`.
-3. Maak de map, geef ze aan de groep en geef de groep schrijfrechten: `sudo mkdir -p /shares/ict` · `sudo chgrp ict /shares/ict` · `sudo chmod g+w /shares/ict`.
+3. Maak de map, geef ze aan de groep en geef de groep schrijfrechten:
+
+    ```bash
+    sudo mkdir -p /shares/ict
+    sudo chgrp ict /shares/ict
+    sudo chmod g+w /shares/ict
+    ```
+
 4. Zet de **setgid-bit** op de map: `sudo chmod g+s /shares/ict`.
 
 Zonder setgid krijgt een bestand van Jacob zijn primaire groep (`jacob`), en kan Liam het niet wijzigen. Met setgid krijgt alles in de map de groep `ict`, en nieuwe submappen erven de setgid-bit.

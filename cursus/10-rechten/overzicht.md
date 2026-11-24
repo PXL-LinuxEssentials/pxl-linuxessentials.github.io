@@ -102,11 +102,9 @@ Het scenario: Liam en Jacob moeten samen bestanden in `/shares/ict` kunnen bewer
 2. Maak een groep voor de samenwerking (`groupadd ict`) en voeg beide gebruikers toe met `usermod -aG ict liam`.
 3. Maak de map, geef ze aan de groep en geef de groep schrijfrechten:
 
-    ```bash
-    sudo mkdir -p /shares/ict
-    sudo chgrp ict /shares/ict
-    sudo chmod g+w /shares/ict
-    ```
+    * `sudo mkdir -p /shares/ict`
+    * `sudo chgrp ict /shares/ict`
+    * `sudo chmod g+w /shares/ict`
 
 4. Zet de **setgid-bit** op de map: `sudo chmod g+s /shares/ict`.
 

@@ -613,26 +613,3 @@ sudo getfacl /Projects/Class1
 sudo getfacl /Projects/Class2
 ```
 :::
-
-## Oefening 9
-
-Probeer de Minetest client op je Ubuntu Desktop te installeren en maak verbinding met de server om het spel te spelen. Zorg ervoor dat je Minetest server actief is.
-
-![oef_9a](./assets/PlayGamesInVMwareWorkstation01.png)
-![oef_9b](./assets/PlayGamesInVMwareWorkstation02.png)
-
-
-::: details Snelle stappen tonen
-```bash
-sudo apt update
-sudo apt install -y minetest
-```
-
-```bash
-# Server starten:
-minetest --server --world ~/linuscraft/serverfiles/pxl-world \
-  --logfile ~/linuscraft/serverfiles/logfile.txt
-```
-
-*Start de client daarna via de GUI of door `minetest` in de terminal te typen.*
-:::

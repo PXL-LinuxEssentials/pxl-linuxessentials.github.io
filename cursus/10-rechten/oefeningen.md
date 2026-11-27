@@ -185,7 +185,7 @@ sudo cp -a /home/<andergebruiker> /tmp/
 
 ---
 
-# Oefeningen op Users, Groups, Permissions — Extra oefeningen
+# Oefeningen op Users, Groups en Special permissions
 
 ## Oefening 1
 
@@ -348,7 +348,11 @@ sudo -u Charlotte rm /home/sales/e1.txt
 ```
 :::
 
-## Oefening 5
+---
+
+# Oefeningen op ACL's
+
+## Oefening 1
 
 Kopieer recursief een ACL-map met alles erin naar een nieuwe map. Zoek uit hoe je, met het gebruik van `getfacl` en `setfacl`, de ACL-configuraties van de ene map naar de andere kopieert.
 
@@ -363,7 +367,7 @@ sudo setfacl --restore=/tmp/acls.txt
 ```
 :::
 
-## Oefening 6
+## Oefening 2
 
 Zoek hoe je een back-up maakt van de ACL-configuraties die in een directory zijn ingesteld.
 
@@ -375,7 +379,7 @@ setfacl --restore=acls-backup.txt
 ```
 :::
 
-## Oefening 7
+## Oefening 3
 
 Stel dat je in een bedrijf werkt waar apparaten worden ontworpen, gemaakt, gerepareerd en verkocht. Ingenieurs ontwerpen de apparaten, technici maken en repareren ze, en verkopers verkopen ze. Alle medewerkers werken binnen een centraal Linux-systeem.
 
@@ -486,7 +490,7 @@ getfacl /home/shared/design /home/shared/info
 **Tip:** Zorg dat de systeem-`umask` groep-schrijfbaar toelaat (bv. `0002`) zodat teamleden elkaars bestanden kunnen bewerken in de shares. Dit kan globaal via `/etc/profile` of per gebruiker in `~/.profile`.
 :::
 
-### Oefening 7.1
+### Oefening 3.1
 
 Maak de mappen, groepen en gebruikers zoals vermeld in bovenstaande situatie.
 
@@ -512,7 +516,7 @@ sudo chown root:root /home/shared/design /home/shared/info /home/technicians
 ```
 :::
 
-### Oefening 7.2
+### Oefening 3.2
 
 Geef alle gebruikers de juiste groepen zoals vermeld in bovenstaande situatie.
 
@@ -532,7 +536,7 @@ sudo usermod -aG sales Grace
 ```
 :::
 
-### Oefening 7.3
+### Oefening 3.3
 
 Stel alle machtigingen en ACL's in voor het hierboven genoemde scenario. Gebruik de speciale bit setgid **niet**, maar zorg er toch voor dat de ACL's worden overgeërfd naar eventuele later aangemaakte submappen.
 
@@ -559,7 +563,7 @@ sudo setfacl -d -m g:technici:rwx /home/technicians
 ```
 :::
 
-## Oefening 8
+## Oefening 4
 
 Maak de directorystructuur met de benodigde gebruikers, groepen en ACL's zoals weergegeven in de onderstaande afbeelding. Test waar de gebruikers Ava en Oliver lees- en bewerkingsrechten hebben.
 

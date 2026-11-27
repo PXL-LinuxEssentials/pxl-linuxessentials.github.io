@@ -603,7 +603,7 @@ def main():
 <div class="progressbar"><i></i></div>
 <div class="chpanel" id="chpanel" hidden style="display:none"><div class="in">{chap_options}</div></div></header>
 <aside class="side" id="side" aria-label="Hoofdstukken"><div class="sidehead"><a class="sh" href="#home">Overzicht cursus</a><div class="sidetools"><button type="button" id="sideopen">Alles open</button><button type="button" id="sideclose">Alles dicht</button></div></div>{''.join(side_html)}</aside><div class="sideback" id="sideback"></div>
-<div class="searchov" id="searchov" hidden><div class="box"><input id="searchin" type="search" placeholder="Zoek in theorie, oefeningen, kennistoetsen en overzichten…" autocomplete="off"><div id="searchres"></div><small>Esc om te sluiten</small></div></div>
+<div class="searchov" id="searchov" hidden><div class="box"><input id="searchin" type="search" placeholder="Zoek in theorie, kennistoetsen en overzichten…" autocomplete="off"><div id="searchres"></div><small>Esc om te sluiten</small></div></div>
 <div class="docentbar" id="docentbar" hidden>Docentenmodus: alle oplossingen zijn ontgrendeld.</div>
 <div class="toast" id="toast" hidden></div>
 <div class="lightbox" id="lightbox" hidden><img alt=""></div>

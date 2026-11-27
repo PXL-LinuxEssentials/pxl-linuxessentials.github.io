@@ -203,6 +203,7 @@ function buildIdx(){
   $$('.page').forEach(function(p){
     var pid=p.dataset.pid;if(pid==='home')return;
     var num=pid.split('-')[0],k=pid.slice(3);
+    if(/^oefeningen/.test(k))return;
     var ct=$('#chpanel a[href^="#'+num+'/"]');var chTitle=ct?ct.textContent.replace(/^\d+/,'').trim():num;
     $$('.sec,.ex,.q,.pdfgrid .pdfcard,.setintro',p).forEach(function(b){
       if(!b.id)b.id='sx'+(cnt++);

@@ -338,16 +338,16 @@ ls -ld /home/planning /home/sales /home/general
 ```
 
 ```bash
-# Schrijven als teamlid (planning):
-sudo -u Walter touch /home/planning/demo.txt
-sudo -u Michael bash -c 'echo "ok" >> /home/planning/demo.txt'
+# Schrijven als teamlid (planning). -i = inloggen, zodat .profile (umask) wordt uitgevoerd:
+sudo -iu Walter touch /home/planning/demo.txt
+sudo -iu Michael bash -c 'echo "ok" >> /home/planning/demo.txt'
 ls -l /home/planning/demo.txt    # verwacht: -rw-rw-r--  Walter Planning
 ```
 
 ```bash
 # Sticky bit test (sales):
-sudo -u Emma touch /home/sales/e1.txt
-sudo -u Charlotte rm /home/sales/e1.txt
+sudo -iu Emma touch /home/sales/e1.txt
+sudo -iu Charlotte rm /home/sales/e1.txt
 # verwacht: rm: cannot remove '/home/sales/e1.txt': Operation not permitted
 ```
 :::

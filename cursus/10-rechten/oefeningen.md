@@ -314,8 +314,12 @@ sudo chmod 755  /home/general    # alleen James (eigenaar) mag schrijven
 
 **Stap 6 — Samenwerken mogelijk maken (umask 0002)**
 
+Gebruikers met een eigen primaire groep (Walter, Michael, Ben en James) hebben standaard al umask `0002`. Emma, Charlotte en Mia hebben als primaire groep `users`, dus zij krijgen `0022` en hun bestanden zijn niet schrijfbaar voor de groep. Zet de umask enkel voor hen:
+
 ```bash
-echo 'umask 0002' | sudo tee -a /etc/profile >/dev/null
+for u in Emma Charlotte Mia; do
+  echo 'umask 0002' | sudo tee -a /home/$u/.profile >/dev/null
+done
 ```
 
 **Stap 7 — Extra Challenge: sticky bit op sales**

@@ -298,10 +298,10 @@ sudo usermod -aG Planning,Sales James
 **Stap 4 — Shares aanmaken en eigenaars/groepen zetten**
 
 ```bash
-sudo mkdir -p /home/planning /home/sales /home/general
-sudo chown root:Planning /home/planning
-sudo chown root:Sales    /home/sales
-sudo chown James:James   /home/general
+sudo mkdir -p /home/planning /home/sales /home/general   # eigenaar is nu root
+sudo chgrp Planning /home/planning     # alleen de groep wijzigen
+sudo chgrp Sales    /home/sales
+sudo chown James    /home/general      # alleen de eigenaar wijzigen
 ```
 
 **Stap 5 — Rechten: setgid en leesrechten voor anderen**
